@@ -112,12 +112,22 @@ public class VacuumCleanerController {
 			//for (int m = 1; m <4 ; m++) {//width - 1
 				//Coordinates newCoordinates = new Coordinates(k, m);
 				//c2 = new Coordinates();
-
+		c2.setRow(1);
+		c2.setColumn(1);
+		
+			for (int i = 2; i < width; i++) {
+				if (room.isMark(c2, "X")) {
+					c2.setColumn(i);
+					//break;
+				}
+			}
+		
 				//if (room.isMark(newCoordinates, " ")) {
 					//Thread.sleep(1000);
-					c2 = new Coordinates();
-					c2.setRow(1);
-					c2.setColumn(1);
+		
+					//c2 = new Coordinates();
+					
+					
 					while (!vc.getCoordinates().isSame(c2)) {
 						
 						vc.setDirection(room.getShortestPath(vc.getDirection(), vc.getCoordinates(), c2));

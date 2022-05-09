@@ -1,6 +1,10 @@
 package cleaner;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class VacuumCleanerMain {
 
@@ -13,7 +17,7 @@ public class VacuumCleanerMain {
         VacuumCleaner vc = new VacuumCleaner("@", VcCoordinates, Direction.RIGHT);
        
         
-        Room room = new Room(15, 15, vc, 3, 3);
+        //Room room = new Room(15, 15, vc, 3, 3);
         
         HashMap<Coordinates, Integer> sm = new HashMap<Coordinates, Integer>();
         
@@ -26,8 +30,8 @@ public class VacuumCleanerMain {
         
         
         ////////////MAIN CONTROLL////////////
-        VacuumCleanerController.cleaning(room, vc);
-        /*
+        //VacuumCleanerController.cleaning(room, vc);
+        
         int rows = 15; //it is better to scan how many rows and columns there are
         int columns = 15;
         String [][] myArray = new String[rows][columns];
@@ -58,7 +62,7 @@ public class VacuumCleanerMain {
         Room room = new Room (15,15, myArray, vc);
         
         VacuumCleanerController.cleaning(room, vc);
-        
+        /*
         List<Map.Entry<Coordinates, Integer>> singleList = sm.entrySet().stream().sorted(Map.Entry.comparingByValue()).collect(Collectors.toList());
         //comparingByValue(): termésszetes sorrend
         singleList.get(0);
