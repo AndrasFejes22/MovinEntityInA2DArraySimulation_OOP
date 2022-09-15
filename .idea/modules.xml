@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/VacuumCleanerSimulation_OOP.iml" filepath="$PROJECT_DIR$/VacuumCleanerSimulation_OOP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LawnMoverSimulation_OOP_EVO.iml" filepath="$PROJECT_DIR$/LawnMoverSimulation_OOP_EVO.iml" />
     </modules>
   </component>
 </project>

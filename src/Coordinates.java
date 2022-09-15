@@ -11,6 +11,10 @@ public class Coordinates {
         this.column = column;
     }
 
+    public Coordinates() {
+
+    }
+
     public Coordinates(Coordinates other) {
         this(other.getRow(), other.getColumn());
     }
@@ -35,11 +39,17 @@ public class Coordinates {
         return this.row == other.row && this.column == other.column;
     }
 
-    public int distanceFrom(Coordinates other) {//pl randomCoordinates.calculateDistance(playerStartingCoordinates);
+    public int distanceFrom(Coordinates other) {
 
         int rowDifference = Math.abs(this.row - other.getRow());
         int columnDifference = Math.abs(this.column - other.getColumn());
         return rowDifference + columnDifference;
+
+    }
+
+    public int columnDistance(Coordinates other) {//pl randomCoordinates.calculateDistance(playerStartingCoordinates);
+        //int rowDifference = Math.abs(this.row - other.getRow());
+        return Math.abs(this.column - other.getColumn());
 
     }
 }
