@@ -37,7 +37,7 @@ public class LawnMowerMain {
         String[][] myArray = new String[rows][columns];
         try {
             System.out.println("FIRST draw a room from a text: ");
-            File myObj = new File("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/garden.txt");
+            File myObj = new File("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/garden.txt");
             Scanner myReader = new Scanner(myObj);
 
             while (myReader.hasNextLine()) {
