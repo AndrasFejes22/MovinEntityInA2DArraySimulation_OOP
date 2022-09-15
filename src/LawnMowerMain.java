@@ -37,10 +37,7 @@ public class LawnMowerMain {
         String[][] myArray = new String[rows][columns];
         try {
             System.out.println("FIRST draw a room from a text: ");
-            //File myObj = new File("C:/Users/Andris/eclipse-workspaceJAVA/CleanerSimulation_OOP/src/cleaner/emptyRoom.txt");
-            //File myObj = new File("C:/Users/Andris/eclipse-workspaceJAVA/CleanerSimulation_OOP/src/cleaner/rooms");
-            //File myObj = new File("C:/Users/Andris/eclipse-workspaceJAVA/CleanerSimulation_OOP/src/cleaner/rooms2.txt");
-            //File myObj = new File("C:/Users/Andris/eclipse-workspaceJAVA/CleanerSimulation_OOP/src/cleaner/maze.txt");
+
             File myObj = new File("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/garden.txt");
 
             Scanner myReader = new Scanner(myObj);
