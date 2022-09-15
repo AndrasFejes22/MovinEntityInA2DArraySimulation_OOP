@@ -214,11 +214,6 @@ public class Garden {
         return garden[coordinates.getRow()][coordinates.getColumn()] = " ";
     }
 
-    public String whatIsAround(Coordinates coordinates) {
-
-        return garden[coordinates.getRow()][coordinates.getColumn()] = " ";
-    }
-
     public String setCleaned2(Coordinates coordinates, String text) {
 
         //return room[coordinates.getRow()][coordinates.getColumn()] = "\u001b[1;31m" + text + "\u001b[0m";//red
@@ -241,7 +236,7 @@ public class Garden {
         return copy;
     }
 
-
+    //////////ITT VAN A LÉNYEG/////////////
 
     private boolean spreadAsterisks(String[][] levelCopy) {
         boolean changed = false;

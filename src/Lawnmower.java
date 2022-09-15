@@ -62,7 +62,7 @@ public class Lawnmower {
         this.coordinates = coordinates;
     }
 
-    public void moveToTheNextDirt(Garden garden) throws InterruptedException {
+    public void moveToTheNextLawn(Garden garden) throws InterruptedException {
         setMark("M");
         //System.out.println("moving to the next dirt");//kiírja, akkor is, ha nincs dirt, mert ez egy mozgató method, és ez a cleanerGoHome() is!
         Coordinates newCoordinates = new Coordinates(getCoordinates());// new Coordinate object
@@ -104,7 +104,7 @@ public class Lawnmower {
 
     }
 
-    public void cleaningARoom(Garden garden) throws InterruptedException {
+    public void mowingTheLawn(Garden garden) throws InterruptedException {
         setMark("@");
 
         Coordinates newCoordinates = new Coordinates(getCoordinates());// new Coordinate object
@@ -133,16 +133,14 @@ public class Lawnmower {
             garden.setCleaned(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn()));
         } else {
 
-            searchingNextDirt(garden);
+            searchingNextLawn(garden);
+
         }
 
     }
 
 
-
-
-
-    public void searchingNextDirt(Garden garden) throws InterruptedException {
+    public void searchingNextLawn(Garden garden) throws InterruptedException {
         setMark("?");
         Coordinates c2 = new Coordinates();
         outer : for (int k = 1; k < garden.getHeight() ; k++) {//height - 1
@@ -154,14 +152,14 @@ public class Lawnmower {
                     c2.setColumn(m);
                     while (!getCoordinates().isSame(c2)) {
                         setDirection(garden.getShortestPath(getDirection(), getCoordinates(), c2));
-                        moveToTheNextDirt(garden); //felokosított mozgás
+                        moveToTheNextLawn(garden); //felokosított mozgás
                         garden.draw();//ha nem rajzolunk, olyan mintha ugrana, akár 10 lépést is!
                         break outer;//**odaért a koszhoz
                     }
                 }
             }
         }
-        cleaningARoom(garden);//**takarít
+        mowingTheLawn(garden);//**nyír
     }
 
 

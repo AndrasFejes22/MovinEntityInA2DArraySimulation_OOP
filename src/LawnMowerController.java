@@ -13,7 +13,7 @@ public class LawnMowerController {
     public static void cleaning(Garden garden, Lawnmower vc) throws InterruptedException {
 
         while (garden.checkRoom(".")) {
-            vc.cleaningARoom(garden);
+            vc.mowingTheLawn(garden);
             //vc.runMaze(room);
             Thread.sleep(120);
             garden.draw();
@@ -36,7 +36,7 @@ public class LawnMowerController {
         while (!vc.getCoordinates().isSame(c2)) {
 
             vc.setDirection(garden.getShortestPath(vc.getDirection(), vc.getCoordinates(), c2));
-            vc.moveToTheNextDirt(garden);
+            vc.moveToTheNextLawn(garden);
             garden.draw();
             System.out.println("-------" + ctr + "c-----");
             Thread.sleep(60);
