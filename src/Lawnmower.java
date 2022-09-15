@@ -62,48 +62,6 @@ public class Lawnmower {
         this.coordinates = coordinates;
     }
 
-    public void moveToTheNextLawn(Garden garden) throws InterruptedException {
-        setMark("M");
-        //System.out.println("moving to the next dirt");//kiírja, akkor is, ha nincs dirt, mert ez egy mozgató method, és ez a cleanerGoHome() is!
-        Coordinates newCoordinates = new Coordinates(getCoordinates());// new Coordinate object
-
-        switch (getDirection()) {
-            case UP:
-                if (garden.isMark(new Coordinates(getCoordinates().getRow() - 1, getCoordinates().getColumn()),".")
-                        || garden.isMark(new Coordinates(getCoordinates().getRow() - 1, getCoordinates().getColumn())," ")){
-                    newCoordinates.setRow(getCoordinates().getRow() - 1); //set newCoordinates
-                    //room.setCleaned3(new Coordinates(getCoordinates().getRow() , getCoordinates().getColumn()), "o");//csaka maze-hez!!!
-                }
-                break;
-            case DOWN:
-                if (garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn()),".")
-                        || garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn())," ")){
-                    newCoordinates.setRow(getCoordinates().getRow() + 1); //set newCoordinates
-                    // room.setCleaned3(new Coordinates(getCoordinates().getRow() , getCoordinates().getColumn()), "o");//csaka maze-hez!!!
-                }
-                break;
-            case LEFT:
-                if (garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1),".")
-                        || garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1)," ")){
-                    newCoordinates.setColumn(getCoordinates().getColumn() - 1);
-                    //room.setCleaned3(new Coordinates(getCoordinates().getRow() , getCoordinates().getColumn()), "o");//csaka maze-hez!!!
-                }
-                break;
-            case RIGHT:
-                if (garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1),".")
-                        || garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1)," ")){
-                    newCoordinates.setColumn(getCoordinates().getColumn() + 1);
-                    //room.setCleaned3(new Coordinates(getCoordinates().getRow() , getCoordinates().getColumn()), "o");//csaka maze-hez!!!
-                }
-                break;
-            //setCoordinates(newCoordinates);//komment
-        }
-        setCoordinates(newCoordinates);
-        Thread.sleep(30);
-
-
-    }
-
     public void mowingTheLawn(Garden garden) throws InterruptedException {
         setMark("@");
 
@@ -161,6 +119,50 @@ public class Lawnmower {
         }
         mowingTheLawn(garden);//**nyír
     }
+
+    public void moveToTheNextLawn(Garden garden) throws InterruptedException {
+        setMark("M");
+        //System.out.println("moving to the next dirt");//kiírja, akkor is, ha nincs dirt, mert ez egy mozgató method, és ez a cleanerGoHome() is!
+        Coordinates newCoordinates = new Coordinates(getCoordinates());// new Coordinate object
+
+        switch (getDirection()) {
+            case UP:
+                if (garden.isMark(new Coordinates(getCoordinates().getRow() - 1, getCoordinates().getColumn()),".")
+                        || garden.isMark(new Coordinates(getCoordinates().getRow() - 1, getCoordinates().getColumn())," ")){
+                    newCoordinates.setRow(getCoordinates().getRow() - 1); //set newCoordinates
+                    //room.setCleaned3(new Coordinates(getCoordinates().getRow() , getCoordinates().getColumn()), "o");//csaka maze-hez!!!
+                }
+                break;
+            case DOWN:
+                if (garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn()),".")
+                        || garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn())," ")){
+                    newCoordinates.setRow(getCoordinates().getRow() + 1); //set newCoordinates
+                    // room.setCleaned3(new Coordinates(getCoordinates().getRow() , getCoordinates().getColumn()), "o");//csaka maze-hez!!!
+                }
+                break;
+            case LEFT:
+                if (garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1),".")
+                        || garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1)," ")){
+                    newCoordinates.setColumn(getCoordinates().getColumn() - 1);
+                    //room.setCleaned3(new Coordinates(getCoordinates().getRow() , getCoordinates().getColumn()), "o");//csaka maze-hez!!!
+                }
+                break;
+            case RIGHT:
+                if (garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1),".")
+                        || garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1)," ")){
+                    newCoordinates.setColumn(getCoordinates().getColumn() + 1);
+                    //room.setCleaned3(new Coordinates(getCoordinates().getRow() , getCoordinates().getColumn()), "o");//csaka maze-hez!!!
+                }
+                break;
+            //setCoordinates(newCoordinates);//komment
+        }
+        setCoordinates(newCoordinates);
+        Thread.sleep(30);
+
+
+    }
+
+
 
 
 
