@@ -57,11 +57,13 @@ public class Lawnmower {
         this.mark = mark;
     }
 
-
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
     }
 
+    ////////////////////////// FŐ MOZGÁSOK //////////////////////////////////
+
+    //1.: Körbenéz, hogy merre tud lépni
     public void mowingTheLawn(Garden garden) throws InterruptedException {
         setMark("@");
 
@@ -97,8 +99,9 @@ public class Lawnmower {
 
     }
 
-
+    //2.: Ha elfogyott a gyep, megkeresi a következőt
     public void searchingNextLawn(Garden garden) throws InterruptedException {
+
         setMark("?");
         Coordinates c2 = new Coordinates();
         outer : for (int k = 1; k < garden.getHeight() ; k++) {//height - 1
@@ -120,6 +123,8 @@ public class Lawnmower {
         mowingTheLawn(garden);//**nyír
     }
 
+
+    //3.: Megtalálta, elindul a gyep felé, minden körben megkapja a helyes directiont a /setDirection(garden.getShortestPath(getDirection(), getCoordinates(), c2));/ segítségével
     public void moveToTheNextLawn(Garden garden) throws InterruptedException {
         setMark("M");
         //System.out.println("moving to the next dirt");//kiírja, akkor is, ha nincs dirt, mert ez egy mozgató method, és ez a cleanerGoHome() is!
