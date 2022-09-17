@@ -10,7 +10,7 @@ public class LawnMowerMain {
     public static void main(String[] args) throws InterruptedException {
 
         Coordinates VcCoordinates = new Coordinates(1, 1);
-        //Coordinates VcCoordinates2 = new Coordinates(15, 9); //demo
+        Coordinates VcCoordinates2 = new Coordinates(15, 9); //demo
 
         Lawnmower vc = new Lawnmower("@ ", VcCoordinates, Direction.UP);
         int width = 16; //it is better to scan how many rows and columns there are////////!!!!!!!!!!
@@ -36,44 +36,15 @@ public class LawnMowerMain {
 
         ////////////MAIN CONTROL////////////
 
-        ///file-ból////
 
-        /*
-        String[][] myArray = new String[rows][columns];
-        try {
-            System.out.println("FIRST draw a room from a text: ");
-            //File myObj = new File("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/garden.txt");
-            File myObj = new File("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/emptyGarden.txt");
-            Scanner myReader = new Scanner(myObj);
-
-            while (myReader.hasNextLine()) {
-                ctr++;
-                for (int i = 0; i < myArray.length; i++) {
-                    String[] line = myReader.nextLine().trim().split(""); //itt volt jó
-
-                    for (int j = 0; j < line.length; j++) {
-                        myArray[i][j] = line[j];
-                        System.out.print(myArray[i][j]);
-                    }
-                    System.out.println();
-                }
-            }
-            System.out.println("ctr :" + ctr);
-            myReader.close();
-        } catch (NoSuchElementException | FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-        */
-        ///file-ból vége////
 
         Garden garden = new Garden(21, 21, myArray, vc); //komment
 
         //**vagy ide, ha előre megrajzol:
-        //room.getShortestPath(Direction.UP, VcCoordinates, VcCoordinates2);//csak demohoz/from->to
+        //garden.getShortestPath(Direction.UP, VcCoordinates, VcCoordinates2);//csak demohoz/from->to
 
 
-        //Room room = new Room(21, 21, myArray, vc); //komment
+
 
         vc.mowing(garden);//komment
 
