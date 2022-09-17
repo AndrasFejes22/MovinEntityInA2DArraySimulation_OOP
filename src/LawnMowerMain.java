@@ -10,10 +10,17 @@ public class LawnMowerMain {
     public static void main(String[] args) throws InterruptedException {
 
         Coordinates VcCoordinates = new Coordinates(1, 1);
-        Coordinates VcCoordinates2 = new Coordinates(15, 9);
+        //Coordinates VcCoordinates2 = new Coordinates(15, 9); //demo
 
         Lawnmower vc = new Lawnmower("@ ", VcCoordinates, Direction.UP);
+        int width = 16; //it is better to scan how many rows and columns there are////////!!!!!!!!!!
+        int height = 16;
 
+        Scanner scanner = new Scanner(System.in);
+
+        ReadFile readFile = new ReadFile(scanner, 21, 21);//ez most csak azért van beégetve nert 21x21 méretű txt-k vannak (rooms)
+
+        String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/garden.txt");
 
         //Room room = new Room(21, 21, vc, 3, 2); //komment
 
@@ -31,9 +38,7 @@ public class LawnMowerMain {
 
         ///file-ból////
 
-        int rows = 21; //it is better to scan how many rows and columns there are////////!!!!!!!!!!
-        int columns = 21;
-        int ctr = 0;
+        /*
         String[][] myArray = new String[rows][columns];
         try {
             System.out.println("FIRST draw a room from a text: ");
@@ -59,7 +64,7 @@ public class LawnMowerMain {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-
+        */
         ///file-ból vége////
 
         Garden garden = new Garden(21, 21, myArray, vc); //komment
