@@ -167,6 +167,42 @@ public class Lawnmower {
 
     }
 
+    public void mowing(Garden garden) throws InterruptedException {
+
+        while (garden.checkRoom(".")) { //vacumm cleaner
+            //while (!(vc.getCoordinates().isSame(new Coordinates(19,19)))) { //MAZE_Runner //ellenőrzés a koordináta nem e "X"
+
+            mowingTheLawn(garden);
+            //vc.runMaze(room);//komment
+            Thread.sleep(100);
+            garden.draw();
+            //}
+        }
+
+
+        mowerGoHome(garden);
+        //stepCounter2(room, vc);
+    }
+
+    public void mowerGoHome(Garden garden) throws InterruptedException {
+        Coordinates c2 = new Coordinates();
+        int ctr = 0;
+        c2.setRow(1);
+        c2.setColumn(1);
+
+        while (!getCoordinates().isSame(c2)) {
+
+            setDirection(garden.getShortestPath(getDirection(),getCoordinates(), c2));
+            moveToTheNextLawn(garden);
+            garden.draw();
+            System.out.println("-------" + ctr + "c-----");
+            Thread.sleep(60);
+            ctr++;
+
+        }
+
+    }
+
 
 
 

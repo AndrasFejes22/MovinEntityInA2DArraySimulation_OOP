@@ -10,7 +10,7 @@ public class LawnMowerController {
     private static Garden garden;
     private static Lawnmower vc;
 
-    public static void cleaning(Garden garden, Lawnmower vc) throws InterruptedException {
+    public static void mowing(Garden garden, Lawnmower vc) throws InterruptedException {
 
         while (garden.checkRoom(".")) {
             vc.mowingTheLawn(garden);
@@ -21,9 +21,6 @@ public class LawnMowerController {
         cleanerGoHome(garden, vc);
 
     }
-
-
-
 
     private static void cleanerGoHome(Garden garden, Lawnmower vc) throws InterruptedException {
 
