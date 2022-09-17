@@ -99,7 +99,7 @@ public class Lawnmower {
 
     }
 
-    //2.: Ha elfogyott a gyep, megkeresi a következőt
+    //2.: Ha elfogyott a gyep, megkeresi a következőt, itt van a getShortestPath, és a moveToTheNextLawn(garden) !!!!!
     public void searchingNextLawn(Garden garden) throws InterruptedException {
 
         setMark("?");
@@ -167,6 +167,7 @@ public class Lawnmower {
 
     }
 
+    //a tulajdonképpeni App
     public void mowing(Garden garden) throws InterruptedException {
 
         while (garden.checkRoom(".")) { //vacumm cleaner
@@ -184,6 +185,7 @@ public class Lawnmower {
         //stepCounter2(room, vc);
     }
 
+    //ha lenyirta a füvet visszamegy a kiindulópontra
     public void mowerGoHome(Garden garden) throws InterruptedException {
         Coordinates c2 = new Coordinates();
         int ctr = 0;
