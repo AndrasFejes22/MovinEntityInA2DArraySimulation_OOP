@@ -70,7 +70,7 @@ public class LawnMowerMain {
 
         //Room room = new Room(21, 21, myArray, vc); //komment
 
-        LawnMowerController.mowing(garden, vc);//komment
+        vc.mowing(garden);//komment
 
     }
 }
