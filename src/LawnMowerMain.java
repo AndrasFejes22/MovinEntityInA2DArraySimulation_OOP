@@ -20,8 +20,8 @@ public class LawnMowerMain {
 
         ReadFile readFile = new ReadFile(scanner, 21, 21);//ez most csak azért van beégetve nert 21x21 méretű txt-k vannak (rooms)
 
-        //String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/gardenWithDiagonalWalls.txt");
-        String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/maze.txt");
+        String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/gardenWithDiagonalWalls.txt");
+        //String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/maze.txt");
 
         //Room room = new Room(21, 21, lawnmower, 3, 2); //komment
 
@@ -48,7 +48,7 @@ public class LawnMowerMain {
 
 
         lawnmower.mowing(garden);   ////////// MOVING ENTITY IN A RANDOM 2D ARRAY /////////
-        lawnmower.runMaze(garden);  ////////// MOVING ENTITY IN A MAZE /////////
+        //lawnmower.runMaze(garden);  ////////// MOVING ENTITY IN A MAZE /////////
 
     }
 }
