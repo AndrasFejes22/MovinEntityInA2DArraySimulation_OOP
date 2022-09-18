@@ -12,7 +12,7 @@ public class LawnMowerMain {
         Coordinates VcCoordinates = new Coordinates(1, 1);
         Coordinates VcCoordinates2 = new Coordinates(15, 9); //demo
 
-        Lawnmower vc = new Lawnmower("@ ", VcCoordinates, Direction.UP);
+        Lawnmower lawnmower = new Lawnmower("@ ", VcCoordinates, Direction.UP);
         int width = 16; //it is better to scan how many rows and columns there are////////!!!!!!!!!!
         int height = 16;
 
@@ -23,7 +23,7 @@ public class LawnMowerMain {
         //String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/gardenWithDiagonalWalls.txt");
         String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/maze.txt");
 
-        //Room room = new Room(21, 21, vc, 3, 2); //komment
+        //Room room = new Room(21, 21, lawnmower, 3, 2); //komment
 
         //System.out.println("#######################");
 
@@ -39,7 +39,7 @@ public class LawnMowerMain {
 
 
 
-        Garden garden = new Garden(21, 21, myArray, vc); //komment
+        Garden garden = new Garden(21, 21, myArray, lawnmower); //komment
 
         //**vagy ide, ha előre megrajzol:
         //garden.getShortestPath(Direction.UP, VcCoordinates, VcCoordinates2);//csak demohoz/from->to
@@ -47,7 +47,8 @@ public class LawnMowerMain {
 
 
 
-        vc.mowing(garden);//komment
+        lawnmower.mowing(garden);   ////////// MOVING ENTITY IN A RANDOM 2D ARRAY /////////
+        lawnmower.runMaze(garden);  ////////// MOVING ENTITY IN A MAZE /////////
 
     }
 }
