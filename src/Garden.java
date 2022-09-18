@@ -337,26 +337,26 @@ public class Garden {
         // első csillag lehelyezése a célpontra
         levelCopy[to.getRow()][to.getColumn()] = "*";
         while(spreadAsterisksWithCheck(levelCopy)) {
-            //draw2DArray2(levelCopy);//csak demohoz//////////////////////////////////////////////////////////////////////
-            //Thread.sleep(1000);
+            draw2DArray2(levelCopy);//csak demohoz//////////////////////////////////////////////////////////////////////
+            Thread.sleep(350);//csak demohoz//////////////////////////////////////////////////////////////////////
             if("*".equals(levelCopy[from.getRow() -1][from.getColumn()])) {//ha a visszafelé terjedő csillagok közül az első felülről
                 //jelent meg akkor felfele megyünk*
-                //System.out.println("up");
+                System.out.println("up");
                 return Direction.UP;
             }
             if("*".equals(levelCopy[from.getRow() +1][from.getColumn()])) {//ha a visszafelé terjedő csillagok közül az első alulról
                 //jelent meg akkor lefele megyünk*
-                //System.out.println("down");
+                System.out.println("down");
                 return Direction.DOWN;
             }
             if("*".equals(levelCopy[from.getRow()][from.getColumn() -1])) {//ha a visszafelé terjedő csillagok közül az első balról
                 //jelent meg akkor balra megyünk*
-                //System.out.println("left");
+                System.out.println("left");
                 return Direction.LEFT;
             }
             if("*".equals(levelCopy[from.getRow()][from.getColumn()+1])) {//ha a visszafelé terjedő csillagok közül az első jobbra
                 //jelent meg akkor jobbra megyünk*
-                //System.out.println("right");
+                System.out.println("right");
                 return Direction.RIGHT;
             }
 

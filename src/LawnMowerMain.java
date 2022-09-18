@@ -9,7 +9,8 @@ public class LawnMowerMain {
 
     public static void main(String[] args) throws InterruptedException {
 
-        Coordinates VcCoordinates = new Coordinates(1, 1);
+        Coordinates VcCoordinates = new Coordinates(8, 6);
+        Coordinates VcCoordinates1 = new Coordinates(10, 6);
         Coordinates VcCoordinates2 = new Coordinates(15, 9); //demohoz!
 
         Lawnmower lawnmower = new Lawnmower("@ ", VcCoordinates, Direction.UP);
@@ -22,8 +23,8 @@ public class LawnMowerMain {
 
         //String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/gardenWithDiagonalWalls.txt");
         //String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/maze.txt");
-        String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/emptyGarden.txt");
-
+        String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/gardenForPresentation.txt");
+        Garden garden = new Garden(21, 21, myArray, lawnmower); //komment
         //Room room = new Room(21, 21, lawnmower, 3, 2); //komment
 
         //System.out.println("#######################");
@@ -33,14 +34,16 @@ public class LawnMowerMain {
         //System.out.println("spread asterisk presentation");
 
         //EZT VAGY IDE, HA GENERÁLT PÁLYA**
-        //room.getShortestPath(Direction.UP, VcCoordinates, VcCoordinates2);//csak demohoz/from->to
+        garden.getShortestPath(Direction.UP, VcCoordinates, VcCoordinates2);//csak demohoz/from->to
+        Thread.sleep(3500);
+        garden.getShortestPath(Direction.UP, VcCoordinates1, VcCoordinates2);//csak demohoz/from->to
 
 
         ////////////MAIN CONTROL////////////
 
 
 
-        Garden garden = new Garden(21, 21, myArray, lawnmower); //komment
+
 
         //**vagy ide, ha előre megrajzol:
         //garden.getShortestPath(Direction.UP, VcCoordinates, VcCoordinates2);//csak demohoz/from->to
@@ -50,7 +53,7 @@ public class LawnMowerMain {
 
         //lawnmower.mowing(garden);   ////////// MOVING ENTITY IN A RANDOM GARDEN /////////
         //lawnmower.mazeRunner(garden);  ////////// MOVING ENTITY IN A MAZE /////////
-        lawnmower.mowingTheLawnInAnEmptyGarden(garden); ////////// MOVING ENTITY IN AN EMPTY GARDEN /////////
+        //lawnmower.mowingTheLawnInAnEmptyGarden(garden); ////////// MOVING ENTITY IN AN EMPTY GARDEN /////////
 
     }
 }
