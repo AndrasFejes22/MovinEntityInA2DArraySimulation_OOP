@@ -182,6 +182,52 @@ public class Lawnmower {
 
     }
 
+    public void movingInAnEmptyGarden(Garden garden) throws InterruptedException {
+        Coordinates firstCoordinates = new Coordinates(1,1);
+        setMark("@");
+        garden.setCleaned(firstCoordinates);
+        Coordinates newCoordinates = new Coordinates(getCoordinates());// new Coordinate object
+
+        if (garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1), ".")) {
+            newCoordinates.setColumn(getCoordinates().getColumn() + 1);
+            setCoordinates(newCoordinates);// setCoordinates(newCoordinates);
+            garden.setCleaned(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn()));
+        } else
+
+        if (garden.isMark(new Coordinates(getCoordinates().getRow() - 1, getCoordinates().getColumn()), ".")) {
+            newCoordinates.setRow(getCoordinates().getRow() - 1);
+            setCoordinates(newCoordinates);
+            garden.setCleaned(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn()));
+        } else
+
+        if (garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn()), ".")) {
+            newCoordinates.setRow(getCoordinates().getRow() + 1);
+            setCoordinates(newCoordinates);
+            garden.setCleaned(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn()));
+        } else
+
+        if (garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1), ".")) {
+            newCoordinates.setColumn(getCoordinates().getColumn() - 1);
+            setCoordinates(newCoordinates);
+            garden.setCleaned(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn()));
+        }
+
+
+
+    }
+    public void mowingTheLawnInAnEmptyGarden(Garden garden) throws InterruptedException {
+
+        while (garden.checkRoom(".")) {
+
+            movingInAnEmptyGarden(garden);
+            Thread.sleep(30);
+            garden.draw();
+
+        }
+
+        mowerGoHome(garden);
+
+    }
 
 
     //ha lenyirta a füvet visszamegy a kiindulópontra

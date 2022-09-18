@@ -10,7 +10,7 @@ public class LawnMowerMain {
     public static void main(String[] args) throws InterruptedException {
 
         Coordinates VcCoordinates = new Coordinates(1, 1);
-        Coordinates VcCoordinates2 = new Coordinates(15, 9); //demo
+        Coordinates VcCoordinates2 = new Coordinates(15, 9); //demohoz!
 
         Lawnmower lawnmower = new Lawnmower("@ ", VcCoordinates, Direction.UP);
         int width = 16; //it is better to scan how many rows and columns there are////////!!!!!!!!!!
@@ -18,10 +18,11 @@ public class LawnMowerMain {
 
         Scanner scanner = new Scanner(System.in);
 
-        ReadFile readFile = new ReadFile(scanner, 21, 21);//ez most csak azért van beégetve nert 21x21 méretű txt-k vannak (rooms)
+        ReadFile readFile = new ReadFile(scanner, 21, 21);//ez most csak azért van beégetve nert 21x21 méretű txt-k vannak (gardens/maze)
 
-        String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/gardenWithDiagonalWalls.txt");
+        //String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/gardenWithDiagonalWalls.txt");
         //String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/maze.txt");
+        String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/emptyGarden.txt");
 
         //Room room = new Room(21, 21, lawnmower, 3, 2); //komment
 
@@ -47,8 +48,9 @@ public class LawnMowerMain {
 
 
 
-        lawnmower.mowing(garden);   ////////// MOVING ENTITY IN A RANDOM 2D ARRAY /////////
-        //lawnmower.runMaze(garden);  ////////// MOVING ENTITY IN A MAZE /////////
+        //lawnmower.mowing(garden);   ////////// MOVING ENTITY IN A RANDOM GARDEN /////////
+        //lawnmower.mazeRunner(garden);  ////////// MOVING ENTITY IN A MAZE /////////
+        lawnmower.mowingTheLawnInAnEmptyGarden(garden); ////////// MOVING ENTITY IN AN EMPTY GARDEN /////////
 
     }
 }
