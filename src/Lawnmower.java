@@ -170,20 +170,19 @@ public class Lawnmower {
     //a tulajdonképpeni App
     public void mowing(Garden garden) throws InterruptedException {
 
-        while (garden.checkRoom(".")) { //vacumm cleaner
-            //while (!(vc.getCoordinates().isSame(new Coordinates(19,19)))) { //MAZE_Runner //ellenőrzés a koordináta nem e "X"
+        while (garden.checkRoom(".")) {
 
             mowingTheLawn(garden);
-            //vc.runMaze(room);//komment
             Thread.sleep(100);
             garden.draw();
-            //}
+
         }
 
-
         mowerGoHome(garden);
-        //stepCounter2(room, vc);
+
     }
+
+
 
     //ha lenyirta a füvet visszamegy a kiindulópontra
     public void mowerGoHome(Garden garden) throws InterruptedException {
@@ -205,28 +204,63 @@ public class Lawnmower {
 
     }
 
+    public void mazeRunner(Garden garden) throws InterruptedException {
 
-
-
-
-    public static Direction RandomDirection(){
-        //Direction direction = Direction.RIGHT;
-        Random r = new Random();
-        int low = 1;
-        int high = 5;
-        int result = r.nextInt(high-low) + low;
-        switch (result) {
-            case 1:
-                return Direction.RIGHT;
-            case 2:
-                return Direction.LEFT;
-            case 3:
-                return Direction.UP;
-            case 4:
-                return Direction.DOWN;
+        //while (!(getCoordinates().isSame(new Coordinates(19,19)))) {
+        while (!(getCoordinates().isSame(new Coordinates(19,19)))) {
+            runMaze(garden);
+            Thread.sleep(100);
+            garden.draw();
         }
-        return null;
+        System.out.println("goToTheStartPosition_while");
+        goToTheStartPosition(garden);
     }
+
+    private void goToTheStartPosition(Garden garden) throws InterruptedException {
+        System.out.println("goToTheStartPosition");
+        Coordinates c2 = new Coordinates();
+        int ctr = 0;
+        c2.setRow(1);
+        c2.setColumn(1);
+
+        while (!getCoordinates().isSame(c2)) {
+
+            moveToTheStart(garden);
+            garden.draw();
+            System.out.println("-------" + ctr + "c-----");
+            Thread.sleep(60);
+            ctr++;
+        }
+
+    }
+
+    public void moveToTheStart(Garden garden) throws InterruptedException {
+        setMark("M");
+
+        Coordinates newCoordinates = new Coordinates(getCoordinates());// new Coordinate object
+
+        if (garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1), " ")) {
+            newCoordinates.setColumn(getCoordinates().getColumn() + 1);
+            setCoordinates(newCoordinates);//setCoordinates(newCoordinates);
+            garden.setCleaned3(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn()-1), "*");
+        } else if (garden.isMark(new Coordinates(getCoordinates().getRow() - 1, getCoordinates().getColumn()), " ")) {
+            newCoordinates.setRow(getCoordinates().getRow() - 1);
+            setCoordinates(newCoordinates);
+            garden.setCleaned3(new Coordinates(getCoordinates().getRow()+1, getCoordinates().getColumn()), "*");
+        } else if (garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn()), " ")) {
+            newCoordinates.setRow(getCoordinates().getRow() + 1);
+            setCoordinates(newCoordinates);
+            garden.setCleaned3(new Coordinates(getCoordinates().getRow()-1, getCoordinates().getColumn()), "*");
+        } else if (garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1), " ")) {
+            newCoordinates.setColumn(getCoordinates().getColumn() - 1);
+            setCoordinates(newCoordinates);
+            garden.setCleaned3(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn()+1), "*");
+
+        }
+        Thread.sleep(30);
+    }
+
+
 
     public void runMaze(Garden garden) throws InterruptedException {
         garden.setCleaned(new Coordinates(1, 1));
@@ -279,6 +313,24 @@ public class Lawnmower {
 
         }
 
+    }
 
+    public static Direction RandomDirection(){
+        //Direction direction = Direction.RIGHT;
+        Random r = new Random();
+        int low = 1;
+        int high = 5;
+        int result = r.nextInt(high-low) + low;
+        switch (result) {
+            case 1:
+                return Direction.RIGHT;
+            case 2:
+                return Direction.LEFT;
+            case 3:
+                return Direction.UP;
+            case 4:
+                return Direction.DOWN;
+        }
+        return null;
     }
 }

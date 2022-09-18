@@ -20,7 +20,8 @@ public class LawnMowerMain {
 
         ReadFile readFile = new ReadFile(scanner, 21, 21);//ez most csak azért van beégetve nert 21x21 méretű txt-k vannak (rooms)
 
-        String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/garden.txt");
+        //String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/gardenWithDiagonalWalls.txt");
+        String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/maze.txt");
 
         //Room room = new Room(21, 21, vc, 3, 2); //komment
 
