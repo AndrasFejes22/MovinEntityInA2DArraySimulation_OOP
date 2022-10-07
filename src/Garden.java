@@ -137,6 +137,8 @@ public class Garden {
     }
 
 
+
+
     private void addHorizontalWall() {
 
         int wallWidth = RANDOM.nextInt(width-3);
