@@ -5,63 +5,22 @@ import java.util.Scanner;
 
 public class LawnMowerMain {
 
+    //The task is actually to move an object in a 2D array that avoids ALL obstacles while traversing the entire array.
 
+    //Further improvements needed:
+
+    //1.: Exception handling in the main menu
+    //2.: Moving entity in the garden
+    //3.: Two, or more mower in the garden
+    //4.: addRandomWalls --> addDiagonalWalls
+    //5.: write more clean, structured and readable code
+    //6.: implement stop() function
 
     public static void main(String[] args) throws InterruptedException {
 
         try(Scanner scanner = new Scanner(System.in)){
             new LawnMowerMain().run(scanner);
         }
-
-
-
-        /*
-        Coordinates VcCoordinates = new Coordinates(8, 6);
-        Coordinates VcCoordinates1 = new Coordinates(10, 6);
-        Coordinates VcCoordinates2 = new Coordinates(15, 9); //demohoz!
-
-        Lawnmower lawnmower = new Lawnmower("@ ", VcCoordinates, Direction.UP);
-        int width = 16; //it is better to scan how many rows and columns there are////////!!!!!!!!!!
-        int height = 16;
-
-        Scanner scanner = new Scanner(System.in);
-
-        ReadFile readFile = new ReadFile(scanner, 21, 21);//ez most csak azért van beégetve nert 21x21 méretű txt-k vannak (gardens/maze)
-
-        //String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/gardenWithDiagonalWalls.txt");
-        //String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/maze.txt");
-        String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/gardenForPresentation.txt");
-        Garden garden = new Garden(21, 21, myArray, lawnmower); //komment
-        //Room room = new Room(21, 21, lawnmower, 3, 2); //komment
-
-        //System.out.println("#######################");
-
-        //Thread.sleep(3000);
-
-        //System.out.println("spread asterisk presentation");
-
-        //EZT VAGY IDE, HA GENERÁLT PÁLYA**
-        garden.getShortestPath(Direction.UP, VcCoordinates, VcCoordinates2);//csak demohoz/from->to
-        Thread.sleep(3500);
-        garden.getShortestPath(Direction.UP, VcCoordinates1, VcCoordinates2);//csak demohoz/from->to
-
-
-        ////////////MAIN CONTROL////////////
-
-
-
-
-
-        //**vagy ide, ha előre megrajzol:
-        //garden.getShortestPath(Direction.UP, VcCoordinates, VcCoordinates2);//csak demohoz/from->to
-
-
-
-
-        //lawnmower.mowing(garden);   ////////// MOVING ENTITY IN A RANDOM GARDEN /////////
-        //lawnmower.mazeRunner(garden);  ////////// MOVING ENTITY IN A MAZE /////////
-        //lawnmower.mowingTheLawnInAnEmptyGarden(garden); ////////// MOVING ENTITY IN AN EMPTY GARDEN /////////
-        */
 
     }
 
@@ -70,7 +29,7 @@ public class LawnMowerMain {
         Coordinates lmCoordinates = new Coordinates(1, 1);
         Coordinates meCoordinates = new Coordinates(11, 14);
         Lawnmower lawnmower = new Lawnmower("@", lmCoordinates, Direction.RIGHT);
-        //MovingEntity movingentity = new MovingEntity("C", meCoordinates, Direction.LEFT);
+
 
         //unhandled InputMismatchException-->TODO
         int menuItem;
@@ -87,7 +46,7 @@ public class LawnMowerMain {
                         Coordinates lmCoordinates0 = new Coordinates(8, 6);
                         Coordinates lmCoordinates1 = new Coordinates(10, 6);
                         Coordinates lmCoordinates2 = new Coordinates(15, 9); //demohoz!
-                        //garden1.getShortestPathForDemo(Direction.UP, lmCoordinates0, lmCoordinates2);
+                        garden1.getShortestPathForDemo(Direction.UP, lmCoordinates0, lmCoordinates2);
                         Thread.sleep(3500);
                         garden1.getShortestPathForDemo(Direction.UP, lmCoordinates1, lmCoordinates2);
                         System.out.println();
@@ -139,7 +98,7 @@ public class LawnMowerMain {
     public static void printingMenu() {
         System.out.println("Please choose from the following menu items:");
         System.out.println("--------------------------------------------");
-        System.out.println("1. Spread asterisks presentation");
+        System.out.println("1. Spread asterisks presentation (for developers)");
         System.out.println("2. Generated garden with obstacles"); //for tests, can put walls on top of each other and next to each other--> TO DO
         System.out.println("3. Drawn garden with obstacles");
         System.out.println("4. Maze type garden");
