@@ -252,8 +252,9 @@ public class Lawnmower {
 
     public void mazeRunner(Garden garden) throws InterruptedException {
 
-        //while (!(getCoordinates().isSame(new Coordinates(19,19)))) {
-        while (!(getCoordinates().isSame(new Coordinates(19,19)))) {
+
+        //while (!(getCoordinates().isSame(new Coordinates(19,19)))) {//labyrinth, find certain point
+        while (garden.checkRoom(".")) {
             runMaze(garden);
             Thread.sleep(100);
             garden.draw();

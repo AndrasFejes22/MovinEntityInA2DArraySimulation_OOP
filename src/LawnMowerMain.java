@@ -89,7 +89,7 @@ public class LawnMowerMain {
                         Coordinates lmCoordinates2 = new Coordinates(15, 9); //demohoz!
                         //garden1.getShortestPathForDemo(Direction.UP, lmCoordinates0, lmCoordinates2);
                         Thread.sleep(3500);
-                        //garden1.getShortestPathForDemo(Direction.UP, lmCoordinates1, lmCoordinates2);
+                        garden1.getShortestPathForDemo(Direction.UP, lmCoordinates1, lmCoordinates2);
                         System.out.println();
                         break;
                     case 2:
@@ -112,8 +112,8 @@ public class LawnMowerMain {
                         break;
                     case 4:
                         String [][] myArray2 = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/maze.txt");
-                        //Garden garden3 = new Garden (21,21, myArray2, lawnmower);
-                        //lawnmower.mazeRunner(garden3);
+                        Garden garden3 = new Garden (21,21, myArray2, lawnmower);
+                        lawnmower.mazeRunner(garden3);
                         System.out.println();
                         break;
                     case 5:
