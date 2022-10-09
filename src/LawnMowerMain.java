@@ -7,6 +7,8 @@ public class LawnMowerMain {
 
     //The task is actually to move an object in a 2D array that avoids ALL obstacles while traversing the entire array.
 
+    //System.exit(0) van a Garden konstruktorában!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     //Further improvements needed:
 
     //1.: Exception handling in the main menu
@@ -53,12 +55,15 @@ public class LawnMowerMain {
                         break;
                     case 2:
                         System.out.print("Number of vertical walls? ");
-
                         int verticalWall = scanner.nextInt();
-                        System.out.print("Number of horizontal walls? ");
 
+                        System.out.print("Number of horizontal walls? ");
                         int horizontalWall = scanner.nextInt();
-                        Garden garden = new Garden(21, 21, lawnmower, verticalWall, horizontalWall); //generated garden/grid
+
+                        System.out.print("Number of diagonal walls? ");
+                        int diagonalWall = scanner.nextInt();
+
+                        Garden garden = new Garden(21, 21, lawnmower, verticalWall, horizontalWall, diagonalWall); //generated garden/grid
                         lawnmower.mowing(garden);
                         System.out.println();
                         break;

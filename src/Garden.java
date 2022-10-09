@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class Garden {
 
@@ -22,7 +25,7 @@ public class Garden {
      * @param width
      *
      */
-    public Garden(int height, int width, Lawnmower lawnmower, int numberOfHorizontalWalls, int numberOfVerticalWalls) throws InterruptedException {
+    public Garden(int height, int width, Lawnmower lawnmower, int numberOfHorizontalWalls, int numberOfVerticalWalls, int numberOfDiagonalWalls) throws InterruptedException {
         super();
         //this.RANDOM = random;
         this.height = height;
@@ -36,17 +39,17 @@ public class Garden {
 
         do {
             initLevelWithSurroundingWalls(height, width, lastRowIndex, lastColumnIndex);
-            addRandomWalls(numberOfHorizontalWalls, numberOfVerticalWalls);
+            addRandomWalls(numberOfHorizontalWalls, numberOfVerticalWalls, numberOfDiagonalWalls);
             isPassableCounter++;
         }while(!isPassable());
 
         draw();
 
-        isPassable(true);
+        isPassable(false);
 
         System.out.println("The No " + isPassableCounter + " board is passable");
 
-        //System.exit(0);//csillagok terjesztése-demo ki-be-kapcsolás /////////////////////////////////////
+        System.exit(0);//////////////////////////////////////////////////////////////////////////////////////////
 
     }
 
@@ -105,19 +108,81 @@ public class Garden {
         }
     }
 
-    public void addRandomWalls(int numberOfHorizontalWalls, int numberOfVerticalWalls) {
+    public void addRandomWalls(int numberOfVerticalWalls, int numberOfHorizontalWalls, int numberOfDiagonalWalls) {
         //TODO fal ne kerüljön a játékosokra
-        for(int i = 0; i < numberOfHorizontalWalls; i++) {
-            addHorizontalWall();
-        }
+        //for(int i = 0; i < numberOfHorizontalWalls; i++) {
+            addHorizontalWall(numberOfHorizontalWalls);
+        //}
         for(int i = 0; i < numberOfVerticalWalls; i++) {
             addVerticalWall();
         }
-        /*
         for(int i = 0; i < numberOfDiagonalWalls; i++) {
             addDiagonalWall();
         }
-        */
+
+    }
+
+    private void addHorizontalWall(int numberOfHorizontalWalls) {
+
+        //Generate of N non-identical random numbers (N = numberOfHorizontalWalls)
+        Set<Integer> setWallWidth = new LinkedHashSet<Integer>();
+        while (setWallWidth.size() < numberOfHorizontalWalls) {
+            setWallWidth.add(RANDOM.nextInt(width-4) + 1);//ne legyen 0
+
+        }
+        // numbers to an ArrayList
+        ArrayList<Integer> listWallWidth = new ArrayList<Integer>(setWallWidth);
+        System.out.println("listWallWidth : "+listWallWidth); //milyen szélesek a vízszintes falak
+
+        //generate column index:
+        int wallColumn = 0;
+        ArrayList<Integer> columns = new ArrayList<Integer>();
+        for(int i = 0; i < listWallWidth.size(); i++){
+            wallColumn = RANDOM.nextInt(width-2-listWallWidth.get(i));
+            columns.add(wallColumn);
+
+        }
+        System.out.println("columns : "+columns);//hányadik oszloptól indulnak a vízszintes falak
+
+        //generate row index
+        Set<Integer> setWallRow = new LinkedHashSet<Integer>();
+        while (setWallRow.size() < numberOfHorizontalWalls) {
+            setWallRow.add(RANDOM.nextInt(height-2)+1);
+        }
+        // numbers to an ArrayList
+        ArrayList<Integer> listWallRow = new ArrayList<Integer>(setWallRow);//hányadik sorban vannak a generált falak
+
+
+
+        System.out.println("setWallRow.size: "+setWallRow.size());
+        System.out.println("setWallWidth.size: "+setWallWidth.size());
+        System.out.println("listWallRow: "+listWallRow);
+        System.out.println("listWallWidth: "+listWallWidth);
+
+
+        //int wallWidth = RANDOM.nextInt(width-3);
+        //int wallRow = RANDOM.nextInt(height-2)+1;
+        //int wallColumn = RANDOM.nextInt(width-2-listWallWidth.get(j));
+        //generate  horizontal walls:
+        for(int j = 0; j < numberOfHorizontalWalls; j++ ) {
+            for (int i = 0; i < listWallWidth.get(j); i++) {
+                wallColumn = columns.get(j);
+                garden[listWallRow.get(j)][wallColumn + i] = "X"; //generate walls
+                //System.out.println("wallColumn : "+wallColumn);
+                //System.out.println("listWallRow.get(i)): " + i + " : " + listWallRow.get(j));
+                //System.out.println("listWallWidth.get(i): "+ i + " : " + listWallWidth.get(j));
+            }
+        }
+    }
+
+    private void addVerticalWall() {
+
+        int wallHeight = RANDOM.nextInt(height - 3) + 1;
+        int wallRow = RANDOM.nextInt(height - 2 - wallHeight);
+        int wallColumn = RANDOM.nextInt(width - 2) + 1;
+        for (int i = 0; i < wallHeight; i++) {
+            garden[wallRow + i][wallColumn] = "X";
+        }
 
     }
 
@@ -136,29 +201,30 @@ public class Garden {
         }
     }
 
-
-
-
-    private void addHorizontalWall() {
-
+    private void addDiagonalWall() {
+        int lastRowIndex = height -1;
+        int lastColumnIndex = width -1;
         int wallWidth = RANDOM.nextInt(width-3);
         int wallRow = RANDOM.nextInt(height-2)+1;
         int wallColumn = RANDOM.nextInt(width-2-wallWidth);
-        for(int i = 0; i < wallWidth; i++ ) {
-            garden[wallRow][wallColumn + i] = "X";
+        int x = RANDOM.nextInt(10) +1;
+        int y = RANDOM.nextInt(5) +1;
+        System.out.println("x: " + x); // ha az x = 0 akkor eggyel kevesebb fal is lehet?
+        System.out.println("y: " + y); // ha az x = 0 akkor eggyel kevesebb fal is lehet?
+
+        for(int row = x; row < 19; row++ ) {
+            for(int column = x; column < 19; column++ ) {
+                if ((row+y == column)){
+
+                    garden[row][column] = "X"; //walls
+                }
+            }
         }
     }
 
-    private void addVerticalWall() {//diagonal wall
 
-        int wallHeight = RANDOM.nextInt(height - 3) + 1;
-        int wallRow = RANDOM.nextInt(height - 2 - wallHeight);
-        int wallColumn = RANDOM.nextInt(width - 2) + 1;
-        for (int i = 0; i < wallHeight; i++) {
-            garden[wallRow + i][wallColumn] = "X";
-        }
 
-    }
+
 
     public void searchAndMove(Coordinates other){
         int rowDifference = 0;
