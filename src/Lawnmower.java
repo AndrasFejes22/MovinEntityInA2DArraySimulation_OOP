@@ -99,6 +99,78 @@ public class Lawnmower {
 
     }
 
+    public void mowingTheLawnTwoObjects(Garden garden, MovingEntity movingentity) throws InterruptedException {
+
+        setMark("@");
+        Coordinates newCoordinates = new Coordinates(getCoordinates());// new Coordinate object
+        //leáll a program ha rálép a macsekra
+        if(getCoordinates().equals(movingentity.getCoordinates())) {
+            System.out.println("ERROR");
+            System.exit(0);
+        }
+        // új, kerüli a macskát
+
+        //figyelni kell az egymáshoz viszonyított helyzetüket is (c<c, rowLM > rowMe, stb)
+        System.out.println("getDirection() kitérés előtt: " + getDirection());// új
+        System.out.println("movingentity.getDirection(): " + movingentity.getDirection());// új
+        if (Coordinates.coordinateDistance(getCoordinates(), movingentity.getCoordinates())) {
+            //a getGivenDirection()-t okosítani kell, lásd errorGarden.txt
+
+            if(movingentity.getCoordinates().getColumn() > getCoordinates().getColumn()) {
+                getGivenDirection(garden, Direction.LEFT);
+            } else {
+                getGivenDirection(garden, Direction.RIGHT);
+            }
+            if(movingentity.getCoordinates().getRow() > getCoordinates().getRow()) {
+                getGivenDirection(garden, Direction.UP);
+            } else {
+                getGivenDirection(garden, Direction.DOWN);
+            }
+
+            System.out.println("KITÉR");
+            System.out.println("getDirection() kitérés után: " + getDirection());// új
+
+        } else { // új, kerüli a macskát, vége
+
+
+            //System.out.println("közbenső string_me: " + garden.getCell(movingentity.getCoordinates()));
+            //System.out.println("közbenső string_lm: " + garden.getCell(getCoordinates()));
+
+            if (garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1), ".")) {
+                newCoordinates.setColumn(getCoordinates().getColumn() + 1);
+                setCoordinates(newCoordinates);// setCoordinates(newCoordinates);
+                garden.setCleaned(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn()));
+                setDirection(Direction.RIGHT);// új
+            } else
+
+            if (garden.isMark(new Coordinates(getCoordinates().getRow() - 1, getCoordinates().getColumn()), ".")) {
+                newCoordinates.setRow(getCoordinates().getRow() - 1);
+                setCoordinates(newCoordinates);
+                garden.setCleaned(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn()));
+                setDirection(Direction.UP);// új
+            } else
+
+            if (garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn()), ".")) {
+                newCoordinates.setRow(getCoordinates().getRow() + 1);
+                setCoordinates(newCoordinates);
+                garden.setCleaned(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn()));
+                setDirection(Direction.DOWN);// új
+            } else
+
+            if (garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1), ".")) {
+                newCoordinates.setColumn(getCoordinates().getColumn() - 1);
+                setCoordinates(newCoordinates);
+                garden.setCleaned(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn()));
+                setDirection(Direction.LEFT);// új
+            } else {
+                searchingNextLawn(garden, movingentity);
+                // movingentity.makeMove(garden);
+
+            }
+        }
+
+    }
+
     //2.: Ha elfogyott a gyep, megkeresi a következőt, itt van a getShortestPath, és a moveToTheNextLawn(garden) !!!!!
     public void searchingNextLawn(Garden garden) throws InterruptedException {
 

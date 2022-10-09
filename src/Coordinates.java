@@ -52,4 +52,21 @@ public class Coordinates {
         return Math.abs(this.column - other.getColumn());
 
     }
+
+    public static boolean coordinateDistance(Coordinates x, Coordinates y) {
+        boolean b = false;
+        int rowDifference = Math.abs(x.getRow() - y.getRow());
+        int columnDifference = Math.abs(x.getColumn() - y.getColumn());
+        int differenceTotal = rowDifference + columnDifference;
+        //if(differenceTotal == 2){
+        //if((columnDifference == 0 && rowDifference == 1) || (columnDifference == 1 && rowDifference == 0)){//kisérlet
+        if(differenceTotal <=2){//kisérlet
+
+            b = true;
+        }
+
+        System.out.println("differenceTotal" + differenceTotal);
+        return b;
+
+    }
 }
