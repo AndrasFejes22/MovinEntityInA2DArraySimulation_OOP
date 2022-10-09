@@ -69,6 +69,14 @@ public class Garden {
         }
     }
 
+    public String[][] getGarden() {
+        return garden;
+    }
+
+    public void setGarden(String[][] garden) {
+        this.garden = garden;
+    }
+
 
     public int getHeight() {
         return height;
@@ -296,7 +304,7 @@ public class Garden {
     }
 
     //2D array lemásolása
-    private String[][] copy(String[][] level){
+    public String[][] copy(String[][] level){
         String[][] copy = new String[height][width];
         for (int row = 0; row < height; row++) {
             System.arraycopy(level[row], 0, copy[row], 0, width);

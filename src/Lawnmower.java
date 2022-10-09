@@ -169,17 +169,28 @@ public class Lawnmower {
 
     //a tulajdonképpeni App
     public void mowing(Garden garden) throws InterruptedException {
-
         while (garden.checkRoom(".")) {
-
             mowingTheLawn(garden);
             Thread.sleep(100);
             garden.draw();
-
         }
-
         mowerGoHome(garden);
+    }
 
+    public void mowingTwoObjects(Garden garden, MovingEntity movingentity) throws InterruptedException {
+        System.out.println("kezdeti string_me: "+garden.getCell(movingentity.getCoordinates()));
+        System.out.println("kezdeti string_lm: "+garden.getCell(getCoordinates()));
+        //movingentity.meMoving(garden);//új
+        //Coordinates meCoordinates = new Coordinates(5, 5);
+        //MovingEntity movingentity = new MovingEntity("C", meCoordinates, Direction.UP); //új
+        while (garden.checkRoom(".")) {
+            //mowingTheLawn(garden, movingentity);
+            movingentity.makeMove(garden);//új
+            Thread.sleep(50);
+            garden.draw();
+            //garden.draw2();//új
+        }
+        //mowerGoHome(garden, movingentity);
     }
 
     public void movingInAnEmptyGarden(Garden garden) throws InterruptedException {
