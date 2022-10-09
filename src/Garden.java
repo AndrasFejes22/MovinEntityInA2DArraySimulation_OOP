@@ -262,6 +262,24 @@ public class Garden {
         }
     }
 
+    public void drawTwoObjects(){ //draw only the mower
+        for (int row = 0; row < height; row++) {
+            for (int column = 0; column < width; column++) {//room[i].length
+
+                Coordinates coordinatesToDraw = new Coordinates(row, column);
+                if (coordinatesToDraw.isSame(lawnmower.getCoordinates())) {
+                    System.out.print(lawnmower.getMark());
+                } else if (coordinatesToDraw.isSame(movingEntity.getCoordinates())) {
+
+                    System.out.print(movingEntity.getMark());
+                }else{
+                    System.out.print(getCell(coordinatesToDraw));
+                }
+            }
+            System.out.println();
+        }
+    }
+
     //draw with moving entity in the garden:
 
     public void draw2() {//draw the mower, and the movingEntity, and the me is shadowing tge grid

@@ -490,13 +490,13 @@ public class Lawnmower {
         //Coordinates meCoordinates = new Coordinates(5, 5);
         //MovingEntity movingentity = new MovingEntity("C", meCoordinates, Direction.UP); //új
         while (garden.checkRoom(".")) {
-            //mowingTheLawn(garden, movingentity);
+            mowingTheLawnTwoObjects(garden, movingentity);
             movingentity.makeMove(garden);//új
             Thread.sleep(50);
-            garden.draw();
-            //garden.draw2();//új
+            //garden.draw();
+            garden.drawTwoObjects();//új
         }
-        //mowerGoHome(garden, movingentity);
+        mowerGoHomeTwoObjects(garden, movingentity);
     }
 
     public void movingInAnEmptyGarden(Garden garden) throws InterruptedException {
@@ -560,6 +560,25 @@ public class Lawnmower {
             moveToTheNextLawn(garden);
             garden.draw();
             System.out.println("-------" + ctr + "c-----");
+            Thread.sleep(60);
+            ctr++;
+
+        }
+
+    }
+
+    public void mowerGoHomeTwoObjects(Garden garden, MovingEntity movingentity) throws InterruptedException {
+        Coordinates c2 = new Coordinates();
+        int ctr = 0;
+        c2.setRow(1);
+        c2.setColumn(1);
+
+        while (!getCoordinates().isSame(c2)) {
+
+            setDirection(garden.getShortestPath(getDirection(),getCoordinates(), c2));
+            moveToTheNextLawnTwoObjects(garden, "H", movingentity);
+            garden.draw();
+            System.out.println("----------" + ctr + "---------");
             Thread.sleep(60);
             ctr++;
 
