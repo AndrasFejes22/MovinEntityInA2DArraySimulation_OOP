@@ -163,13 +163,160 @@ public class Lawnmower {
                 garden.setCleaned(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn()));
                 setDirection(Direction.LEFT);// új
             } else {
-                searchingNextLawn(garden, movingentity);
+                searchingNextLawnTwoObjects(garden, movingentity);
                 // movingentity.makeMove(garden);
 
             }
         }
 
     }
+
+    public void searchingNextLawnTwoObjects(Garden garden, MovingEntity movingentity) throws InterruptedException {//működik
+        //Coordinates newCoordinates1 = new Coordinates(getCoordinates());// new Coordinate object
+        //leáll a program ha rálép a macsekra,új
+        if (getCoordinates().equals(movingentity.getCoordinates())) {
+            System.out.println("ERROR_SRC");
+            System.exit(0);
+        }//leáll a program ha rálép a macsekra,új
+        // új, kerüli a macskát
+
+        //figyelni kell az egymáshoz viszonyított helyzetüket is (c<c, rowLM > rowMe, stb)
+        System.out.println("getDirection() kitérés előtt_SRC: " + getDirection());// új
+        System.out.println("movingentity.getDirection()_SRC: " + movingentity.getDirection());// új
+        Coordinates.coordinateDistance(getCoordinates(), movingentity.getCoordinates());// új
+        if (Coordinates.coordinateDistance(getCoordinates(), movingentity.getCoordinates())) {
+            //a getGivenDirection()-t okosítani kell, lásd errorGarden.txt
+            if (movingentity.getCoordinates().getColumn() > getCoordinates().getColumn()) {
+                getGivenDirection(garden, Direction.LEFT);
+            } else {
+                getGivenDirection(garden, Direction.RIGHT);
+            }
+            if (movingentity.getCoordinates().getRow() > getCoordinates().getRow()) {
+                getGivenDirection(garden, Direction.UP);
+            } else {
+                getGivenDirection(garden, Direction.DOWN);
+            }
+
+            System.out.println("KITÉR_SRC");
+            System.out.println("getDirection() kitérés után_SRC: " + getDirection());// új
+
+        } else {// új, kerüli a macskát
+            movingentity.makeMove(garden);
+            Coordinates c2 = new Coordinates();
+            //c2 = fewestSteps(room); //nem jo
+            //System.out.println("c2 in searchingNextLawn: "+ c2);
+
+            //Coordinates c2 = new Coordinates();
+
+            outer:
+            for (int k = 1; k < garden.getHeight(); k++) {//height - 1
+                for (int m = 1; m < garden.getWidth(); m++) {//width - 1
+                    Coordinates newCoordinates = new Coordinates(k, m);
+                    //c2 = new Coordinates();
+
+                    if (garden.isMark(newCoordinates, ".") && !garden.isMark(newCoordinates, "C")) {//új
+
+                        Thread.sleep(30);
+
+                        c2.setRow(k);
+                        c2.setColumn(m);
+
+                        while (!getCoordinates().isSame(c2)) {//c2 a jó
+
+                            setDirection(garden.getShortestPath(getDirection(), getCoordinates(), c2)); //////////// SMART MOVEMENT///////////
+                            moveToTheNextLawnTwoObjects(garden, "M", movingentity);
+
+                            garden.draw();//ha nem rajzolunk, olyan mintha ugrana, akár 10 lépést is!
+
+                            break outer;//**found the following "."
+
+                        }
+
+                    }
+
+
+                }
+
+            }
+
+
+            mowingTheLawnTwoObjects(garden, movingentity);//**takarít, eredeti, működik
+        }
+    }
+
+        public void moveToTheNextLawnTwoObjects(Garden garden, String mark, MovingEntity movingentity) throws InterruptedException {
+            movingentity.makeMove(garden);
+            //movingentity.makeMove(garden);//új
+            //mark = "M";
+            setMark(mark);
+            //System.out.println("moving to the next dirt");//kiírja, akkor is, ha nincs dirt, mert ez egy mozgató method, és ez a cleanerGoHome() is!
+            Coordinates newCoordinates = new Coordinates(getCoordinates());// new Coordinate object
+            if(getCoordinates().equals(movingentity.getCoordinates())) {
+                System.out.println("ERROR");
+                System.exit(0);
+            }
+            // új, kerüli a macskát
+
+            //figyelni kell az egymáshoz viszonyított helyzetüket is (c<c, rowLM > rowMe, stb)
+            System.out.println("getDirection() kitérés előtt: " + getDirection());// új
+            System.out.println("movingentity.getDirection(): " + movingentity.getDirection());// új
+            if (Coordinates.coordinateDistance(getCoordinates(), movingentity.getCoordinates())) {
+                //a getGivenDirection()-t okosítani kell, lásd errorGarden.txt
+                if(movingentity.getCoordinates().getColumn() > getCoordinates().getColumn()) {
+                    getGivenDirection(garden, Direction.LEFT);
+                } else {
+                    getGivenDirection(garden, Direction.RIGHT);
+                }
+                if(movingentity.getCoordinates().getRow() > getCoordinates().getRow()) {
+                    getGivenDirection(garden, Direction.UP);
+                } else {
+                    getGivenDirection(garden, Direction.DOWN);
+                }
+
+                System.out.println("KITÉR");
+                System.out.println("getDirection() kitérés után: " + getDirection());// új
+
+            } else {
+
+                switch (getDirection()) {
+                    case UP:
+                        if (garden.isMark(new Coordinates(getCoordinates().getRow() - 1, getCoordinates().getColumn()),".")
+                                || garden.isMark(new Coordinates(getCoordinates().getRow() - 1, getCoordinates().getColumn())," ")){
+                            newCoordinates.setRow(getCoordinates().getRow() - 1); //set newCoordinates
+
+                        }
+                        break;
+                    case DOWN:
+                        if (garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn()),".")
+                                ||garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn())," ")){
+                            newCoordinates.setRow(getCoordinates().getRow() + 1);
+
+                        }
+                        break;
+                    case LEFT:
+                        if (garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1),".")
+                                || garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1)," ")){
+                            newCoordinates.setColumn(getCoordinates().getColumn() - 1);
+
+                        }
+                        break;
+                    case RIGHT:
+                        if (garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1),".")
+                                || garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1)," ")){
+                            newCoordinates.setColumn(getCoordinates().getColumn() + 1);
+
+                        }
+                        break;
+
+                }
+                setCoordinates(newCoordinates);
+                Thread.sleep(30);
+
+
+            }
+        }
+
+    //}// új, kerüli a macskát, else vége
 
     public void getGivenDirection(Garden garden, Direction direction) throws InterruptedException { //ellép a macska elől elvileg de nem jó ha ép tényleg ellép, akkor is megfordítja, és pnt hogy felé lép
         //Direction direction = Direction.RIGHT;
