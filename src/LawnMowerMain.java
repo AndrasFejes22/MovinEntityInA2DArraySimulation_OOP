@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -39,8 +40,8 @@ public class LawnMowerMain {
             ReadFile readFile = new ReadFile(scanner, 21, 21);
             do {
                 printingMenu();
-                System.out.print("\n? ");
-                menuItem = scanner.nextInt();
+                System.out.println();
+                menuItem = readInt("Please give a whole number!", scanner);
                 switch (menuItem) {
                     case 1:
                         String [][] myArrayPr = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/gardenForPresentation.txt");
@@ -109,5 +110,28 @@ public class LawnMowerMain {
         System.out.println("4. Maze type garden");
         System.out.println("5. Mowing lawn in an empty garden (no obstacles)");
         System.out.println("0. Exit");
+    }
+
+    static int readInt(String askMessage, Scanner scanner) {
+        boolean inputCorrect;
+        int number = 0;
+        do {
+            inputCorrect = true;
+            System.out.println(askMessage);
+            try {
+                number = scanner.nextInt();
+                if(number > 5 || number < 0){
+                    System.out.println("You can only enter a number between 0 and 5!");
+                    inputCorrect = false;
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("This is not a valid integer!");
+                inputCorrect = false;
+            } finally {
+                scanner.nextLine();
+            }
+        } while (!inputCorrect);
+        return number;
     }
 }
