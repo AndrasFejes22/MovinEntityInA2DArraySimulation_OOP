@@ -30,8 +30,9 @@ public class LawnMowerMain {
     private void run(Scanner scanner) throws InterruptedException {
 
         Coordinates lmCoordinates = new Coordinates(1, 1);
-        Coordinates meCoordinates = new Coordinates(11, 14);
+        Coordinates meCoordinates = new Coordinates(3, 17);
         Lawnmower lawnmower = new Lawnmower("@", lmCoordinates, Direction.RIGHT);
+        MovingEntity movingentity = new MovingEntity("C", meCoordinates, Direction.LEFT);
 
 
         //unhandled InputMismatchException-->TODO
@@ -88,6 +89,13 @@ public class LawnMowerMain {
                         lawnmower.mowingTheLawnInAnEmptyGarden(garden4);
                         System.out.println();
                         break;
+                    case 6:
+                        String [][] myArray6 = readFile.arrayFromTxt("C:/Users/Andris/eclipse-workspaceJAVA/CleanerSimulation_OOP/src/gardens/gardenWithDiagonalWalls.txt");
+                        Garden garden6 = new Garden (21,21, myArray6, lawnmower, movingentity);
+                        lawnmower.mowingTwoObjects(garden6, movingentity);
+                        //System.out.println("kezdeti string: "+garden6.getCell(meCoordinates));
+                        System.out.println();
+                        break;
                     //default:
                     //System.out.println("There is no such menu item");
                     //break;
@@ -109,6 +117,7 @@ public class LawnMowerMain {
         System.out.println("3. Drawn garden with obstacles");
         System.out.println("4. Maze type garden");
         System.out.println("5. Mowing lawn in an empty garden (no obstacles)");
+        System.out.println("6. Mowing two objects garden (no obstacles)");
         System.out.println("0. Exit");
     }
 
@@ -120,7 +129,7 @@ public class LawnMowerMain {
             System.out.println(askMessage);
             try {
                 number = scanner.nextInt();
-                if(number > 5 || number < 0){
+                if(number > 6 || number < 0){
                     System.out.println("You can only enter a number between 0 and 5!");
                     inputCorrect = false;
                 }

@@ -17,7 +17,7 @@ public class Garden {
     private int numberOfVerticalWalls;
 
     private Lawnmower lawnmower;
-
+    private MovingEntity movingEntity;
     static Random RANDOM = new Random();
 
     /**
@@ -50,6 +50,45 @@ public class Garden {
         System.out.println("The No " + isPassableCounter + " board is passable");
 
         System.exit(0);//////////////////////////////////////////////////////////////////////////////////////////
+
+    }
+
+    public Garden(int height, int width, String[][] arr, Lawnmower cleaner, MovingEntity movingEntity){
+        this.height = height;
+        this.width = width;
+        this.movingEntity = movingEntity;//új
+        this.lawnmower = cleaner;
+        this.garden =  new String[height][width];
+
+        for (int row = 0; row < height; row++) {//initLevel();
+            for (int column = 0; column < width; column++) {
+
+                garden[row][column] = arr[row][column];
+
+            }
+        }
+    }
+
+    public Garden(int height, int width, Lawnmower lawnmower, MovingEntity movingEntity, int numberOfHorizontalWalls, int numberOfVerticalWalls) throws InterruptedException {
+        super();
+        this.movingEntity = movingEntity;//új
+        this.height = height;
+        this.width = width;
+        this.lawnmower = lawnmower;
+        this.garden = new String[height][width];
+        int lastRowIndex = height - 1;
+        int lastColumnIndex = width - 1;
+
+        int isPassableCounter = 0;
+        do {
+            initLevelWithSurroundingWalls(height, width, lastRowIndex, lastColumnIndex);
+            addRandomWalls2(numberOfHorizontalWalls, numberOfVerticalWalls);
+            isPassableCounter++;
+        }while(!isPassable());
+        draw2();//új
+        isPassable(true);
+
+        System.out.println("The No " + isPassableCounter + " board is passable");
 
     }
 
@@ -130,6 +169,20 @@ public class Garden {
 
     }
 
+    public void addRandomWalls2(int numberOfVerticalWalls, int numberOfHorizontalWalls) {
+        //TODO fal ne kerüljön a játékosokra
+        //for(int i = 0; i < numberOfHorizontalWalls; i++) {
+        addHorizontalWall(numberOfHorizontalWalls);
+        //}
+        for(int i = 0; i < numberOfVerticalWalls; i++) {
+            addVerticalWall();
+        }
+
+
+    }
+
+
+
     private void addHorizontalWall(int numberOfHorizontalWalls) {
 
         //Generate of N non-identical random numbers (N = numberOfHorizontalWalls)
@@ -206,6 +259,33 @@ public class Garden {
                 }
             }
             System.out.println();
+        }
+    }
+
+    //draw with moving entity in the garden:
+
+    public void draw2() {//draw the mower, and the movingEntity, and the me is shadowing tge grid
+
+        for (int row = 0; row < height; row++) {
+            for (int column = 0; column < width; column++) {
+                Coordinates coordinatesToDraw = new Coordinates(row, column);
+
+                if (coordinatesToDraw.isSame(lawnmower.getCoordinates())) {
+                    //setCell2(mower);//új
+                    System.out.print(lawnmower.getMark());
+                    //System.out.print(getCellLm(coordinatesToDraw, mower));//új
+                } else if (coordinatesToDraw.isSame(movingEntity.getCoordinates())) {
+                    //setCell2(movingEntity);//új
+                    //System.out.print(movingEntity.getMark());
+                    System.out.print(getCellme(coordinatesToDraw, movingEntity));//új
+                } else {
+                    //System.out.print(getCell(coordinatesToDraw));
+                    System.out.print(getCellGrid(coordinatesToDraw));//új
+                }
+            }
+            System.out.println();
+
+
         }
     }
 
@@ -296,6 +376,17 @@ public class Garden {
         return garden[coordinates.getRow()][coordinates.getColumn()] = text ;
     }
 
+    public String getCellme(Coordinates coordinates, MovingEntity movingEntity) {
+        return garden[coordinates.getRow()][coordinates.getColumn()] = movingEntity.getMark();
+    }
+
+    public String getCellLm(Coordinates coordinates, Lawnmower mower) {
+        return garden[coordinates.getRow()][coordinates.getColumn()] = mower.getMark();
+    }
+
+    public String getCellGrid(Coordinates coordinates) {
+        return garden[coordinates.getRow()][coordinates.getColumn()] = garden[coordinates.getRow()][coordinates.getColumn()];
+    }
 
 
     public String setCleaned3(Coordinates coordinates, String text) {
