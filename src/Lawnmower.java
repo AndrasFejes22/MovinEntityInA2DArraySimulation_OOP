@@ -388,7 +388,7 @@ public class Lawnmower {
         } else
 
         if (garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn()), ".")
-                || garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn()), ".")) {
+                || garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn()), " ")) {
             newCoordinates.setRow(getCoordinates().getRow() + 1);
             setCoordinates(newCoordinates);
             garden.setCleaned(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn()));
@@ -396,7 +396,7 @@ public class Lawnmower {
         } else
 
         if (garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1), ".")
-                || garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1), ".")) {
+                || garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1), " ")) {
             newCoordinates.setColumn(getCoordinates().getColumn() - 1);
             setCoordinates(newCoordinates);
             garden.setCleaned(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn()));

@@ -262,7 +262,7 @@ public class Garden {
         }
     }
 
-    public void drawTwoObjects(){ //draw only the mower
+    public void drawTwoObjects(){
         for (int row = 0; row < height; row++) {
             for (int column = 0; column < width; column++) {//room[i].length
 
