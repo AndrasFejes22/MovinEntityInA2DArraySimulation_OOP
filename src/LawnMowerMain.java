@@ -12,8 +12,8 @@ public class LawnMowerMain {
 
     //Further improvements needed:
 
-    //1.: Exception handling in the main menu
-    //2.: Moving entity in the garden
+    //1.: Exception handling in the main menu /d
+    //2.: Moving entity in the garden /d
     //3.: Two, or more mower in the garden
     //4.: addRandomWalls --> addDiagonalWalls
     //5.: write more clean, structured and readable code
@@ -35,7 +35,7 @@ public class LawnMowerMain {
         MovingEntity movingentity = new MovingEntity("C", meCoordinates, Direction.LEFT);
 
 
-        //unhandled InputMismatchException-->TODO
+
         int menuItem;
         try (scanner) {
             ReadFile readFile = new ReadFile(scanner, 21, 21);
@@ -117,7 +117,7 @@ public class LawnMowerMain {
         System.out.println("3. Drawn garden with obstacles");
         System.out.println("4. Maze type garden");
         System.out.println("5. Mowing lawn in an empty garden (no obstacles)");
-        System.out.println("6. Mowing two objects garden (no obstacles)");
+        System.out.println("6. Mowing two objects garden");
         System.out.println("0. Exit");
     }
 
