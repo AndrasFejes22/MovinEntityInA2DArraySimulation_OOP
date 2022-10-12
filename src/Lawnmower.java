@@ -365,11 +365,16 @@ public class Lawnmower {
         setCoordinates(newCoordinates);
     }
 
-    public void stepAwayFromTheMovinObject(Garden garden) throws InterruptedException {
+    public void stepAwayFromTheMovinObject(Garden garden) throws InterruptedException {//Deprecated
         Coordinates firstCoordinates = new Coordinates(1,1);
         setMark("E");
         garden.setCleaned(firstCoordinates);
         Coordinates newCoordinates = new Coordinates(getCoordinates());// new Coordinate object
+
+        //if(getCoordinates().equals(movingentity.getCoordinates())) {
+        //    System.out.println("ERROR! Please call for help! A life is in danger!");
+        //    System.exit(0);
+        //}
 
         if (garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1), ".")
                 || garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1), " ")) {
