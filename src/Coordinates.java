@@ -53,14 +53,14 @@ public class Coordinates {
 
     }
 
-    public static boolean coordinateDistance(Coordinates x, Coordinates y) {
+    public static boolean coordinateDistance(Coordinates x, Coordinates y, int distance) {
         boolean b = false;
         int rowDifference = Math.abs(x.getRow() - y.getRow());
         int columnDifference = Math.abs(x.getColumn() - y.getColumn());
         int differenceTotal = rowDifference + columnDifference;
         //if(differenceTotal == 2){
         //if((columnDifference == 0 && rowDifference == 1) || (columnDifference == 1 && rowDifference == 0)){//kisérlet
-        if(differenceTotal <=2){//kisérlet
+        if(differenceTotal <= distance){//kisérlet
 
             b = true;
         }

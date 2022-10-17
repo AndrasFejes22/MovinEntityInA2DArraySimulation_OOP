@@ -101,34 +101,47 @@ public class Lawnmower {
 
     public void mowingTheLawnTwoObjects(Garden garden, MovingEntity movingentity) throws InterruptedException {
 
+        System.out.println("belép a mowingTheLawn-ba: ");
+        System.out.println();
         setMark("@");
         Coordinates newCoordinates = new Coordinates(getCoordinates());// new Coordinate object
         //leáll a program ha rálép a macsekra
         if(getCoordinates().equals(movingentity.getCoordinates())) {
-            System.out.println("ERROR");
+            System.out.println("ERROR! Please call for help! A life is in danger!");
             System.exit(0);
         }
         // új, kerüli a macskát
 
         //figyelni kell az egymáshoz viszonyított helyzetüket is (c<c, rowLM > rowMe, stb)
-        System.out.println("getDirection() kitérés előtt: " + getDirection());// új
-        System.out.println("movingentity.getDirection(): " + movingentity.getDirection());// új
-        if (Coordinates.coordinateDistance(getCoordinates(), movingentity.getCoordinates())) {
+        System.out.println("getDirection() kitérés előtt_mowingTheLawn: " + getDirection());// új
+        System.out.println("movingentity.getDirection()_mowingTheLawn: " + movingentity.getDirection());// új
+        if (Coordinates.coordinateDistance(getCoordinates(), movingentity.getCoordinates(), 2)) { //<= distance
             //a getGivenDirection()-t okosítani kell, lásd errorGarden.txt
 
-            if(movingentity.getCoordinates().getColumn() > getCoordinates().getColumn()) {
-                getGivenDirection(garden, Direction.LEFT);
-            } else {
-                getGivenDirection(garden, Direction.RIGHT);
-            }
-            if(movingentity.getCoordinates().getRow() > getCoordinates().getRow()) {
-                getGivenDirection(garden, Direction.UP);
-            } else {
-                getGivenDirection(garden, Direction.DOWN);
-            }
+            getGivenDirection(garden, getDirection(), movingentity);
+			/*getGivenDirection(garden, getDirection(), movingentity);
+			if ((movingentity.getCoordinates().getColumn() == getCoordinates().getColumn())
+					&& movingentity.getCoordinates().getRow() > getCoordinates().getRow()) {
+				getGivenDirection(garden, Direction.UP, movingentity);
+			} else if ((movingentity.getCoordinates().getColumn() == getCoordinates().getColumn())
+					&& movingentity.getCoordinates().getRow() < getCoordinates().getRow()) {
+				getGivenDirection(garden, Direction.DOWN, movingentity);
+			} else
 
-            System.out.println("KITÉR");
-            System.out.println("getDirection() kitérés után: " + getDirection());// új
+			if ((movingentity.getCoordinates().getRow() == getCoordinates().getRow())
+					&& movingentity.getCoordinates().getColumn() > getCoordinates().getColumn()) {
+				getGivenDirection(garden, Direction.LEFT, movingentity);
+			} else if (movingentity.getCoordinates().getColumn() > getCoordinates().getColumn()) {
+				getGivenDirection(garden, Direction.LEFT, movingentity);
+			} else {
+				getGivenDirection(garden, Direction.RIGHT, movingentity);
+			}
+			*/
+            System.out.println("KITÉR_mowingTheLawn");
+            System.out.println("getDirection() kitérés után_mowingTheLawn: " + getDirection());// új
+            System.out.println("row_után_mowingTheLawn: "+getCoordinates().getRow());
+            System.out.println("column_után_mowingTheLawn: "+getCoordinates().getColumn());
+            //a kitérés előtt után pl UP/UP nem feltétlen rossz, a döntő az egymáshoz viszonyított koordináták helyzete!!!
 
         } else { // új, kerüli a macskát, vége
 
@@ -169,6 +182,7 @@ public class Lawnmower {
             }
         }
 
+
     }
 
     public void searchingNextLawnTwoObjects(Garden garden, MovingEntity movingentity) throws InterruptedException {//működik
@@ -183,19 +197,9 @@ public class Lawnmower {
         //figyelni kell az egymáshoz viszonyított helyzetüket is (c<c, rowLM > rowMe, stb)
         System.out.println("getDirection() kitérés előtt_SRC: " + getDirection());// új
         System.out.println("movingentity.getDirection()_SRC: " + movingentity.getDirection());// új
-        Coordinates.coordinateDistance(getCoordinates(), movingentity.getCoordinates());// új
-        if (Coordinates.coordinateDistance(getCoordinates(), movingentity.getCoordinates())) {
-            //a getGivenDirection()-t okosítani kell, lásd errorGarden.txt
-            if (movingentity.getCoordinates().getColumn() > getCoordinates().getColumn()) {
-                getGivenDirection(garden, Direction.LEFT);
-            } else {
-                getGivenDirection(garden, Direction.RIGHT);
-            }
-            if (movingentity.getCoordinates().getRow() > getCoordinates().getRow()) {
-                getGivenDirection(garden, Direction.UP);
-            } else {
-                getGivenDirection(garden, Direction.DOWN);
-            }
+
+        if (Coordinates.coordinateDistance(getCoordinates(), movingentity.getCoordinates(),2)) {
+            getGivenDirection(garden, getDirection(), movingentity);
 
             System.out.println("KITÉR_SRC");
             System.out.println("getDirection() kitérés után_SRC: " + getDirection());// új
@@ -226,7 +230,7 @@ public class Lawnmower {
                             setDirection(garden.getShortestPath(getDirection(), getCoordinates(), c2)); //////////// SMART MOVEMENT///////////
                             moveToTheNextLawnTwoObjects(garden, "M", movingentity);
 
-                            garden.draw();//ha nem rajzolunk, olyan mintha ugrana, akár 10 lépést is!
+                            garden.drawTwoObjects();//ha nem rajzolunk, olyan mintha ugrana, akár 10 lépést is!
 
                             break outer;//**found the following "."
 
@@ -259,19 +263,9 @@ public class Lawnmower {
 
             //figyelni kell az egymáshoz viszonyított helyzetüket is (c<c, rowLM > rowMe, stb)
             System.out.println("getDirection() kitérés előtt: " + getDirection());// új
-            System.out.println("movingentity.getDirection(): " + movingentity.getDirection());// új
-            if (Coordinates.coordinateDistance(getCoordinates(), movingentity.getCoordinates())) {
-                //a getGivenDirection()-t okosítani kell, lásd errorGarden.txt
-                if(movingentity.getCoordinates().getColumn() > getCoordinates().getColumn()) {
-                    getGivenDirection(garden, Direction.LEFT);
-                } else {
-                    getGivenDirection(garden, Direction.RIGHT);
-                }
-                if(movingentity.getCoordinates().getRow() > getCoordinates().getRow()) {
-                    getGivenDirection(garden, Direction.UP);
-                } else {
-                    getGivenDirection(garden, Direction.DOWN);
-                }
+            //System.out.println("movingentity.getDirection(): " + movingentity.getDirection());// új
+            if (Coordinates.coordinateDistance(getCoordinates(), movingentity.getCoordinates(), 2)) {
+                getGivenDirection(garden, getDirection(), movingentity);
 
                 System.out.println("KITÉR");
                 System.out.println("getDirection() kitérés után: " + getDirection());// új
@@ -318,51 +312,179 @@ public class Lawnmower {
 
     //}// új, kerüli a macskát, else vége
 
-    public void getGivenDirection(Garden garden, Direction direction) throws InterruptedException { //ellép a macska elől elvileg de nem jó ha ép tényleg ellép, akkor is megfordítja, és pnt hogy felé lép
-        //Direction direction = Direction.RIGHT;
+    public void getGivenDirection(Garden garden, Direction direction, MovingEntity movingEntity) throws InterruptedException{
+        System.out.println("belép a getGivenDirection-ba");
+        System.out.println();
+        System.out.println("getGivenDirection: " + direction);
         Coordinates newCoordinates = new Coordinates(getCoordinates());// new Coordinate object
         switch (direction) {
             case UP:
-                if (garden.isMark(new Coordinates(getCoordinates().getRow() - 1, getCoordinates().getColumn()), ".")
-                        || garden.isMark(new Coordinates(getCoordinates().getRow() - 1, getCoordinates().getColumn()), " ")) {
+
+                if ((garden.isMark(new Coordinates(getCoordinates().getRow() - 1, getCoordinates().getColumn()),".")
+                        || garden.isMark(new Coordinates(getCoordinates().getRow() - 1, getCoordinates().getColumn())," "))
+                        && (getCoordinates().getRow() - 1) < movingEntity.getCoordinates().getRow()){
                     newCoordinates.setRow(getCoordinates().getRow() - 1); //set newCoordinates
+                    setCoordinates(newCoordinates);
                     setDirection(Direction.UP);// új
+                    System.out.println("_UP_");
                 } else {
-                    stepAwayFromTheMovinObject(garden);
+                    System.out.println("_UP_else");
+                    //setCoordinates(stepAwayFromTheMovinObject(garden, movingEntity));
+                    if ((garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn()),".")
+                            || garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn())," "))
+                            && (getCoordinates().getRow() + 1) > movingEntity.getCoordinates().getRow()){
+                        newCoordinates.setRow(getCoordinates().getRow() + 1); //set newCoordinates
+                        setCoordinates(newCoordinates);
+                        setDirection(Direction.DOWN);// új
+                        System.out.println("_DOWN_");
+                    } else if
+                    ((garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1),".")
+                                    || garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1)," "))
+                                    && (getCoordinates().getColumn() - 1) < movingEntity.getCoordinates().getColumn()){
+                        newCoordinates.setColumn(getCoordinates().getColumn() - 1);
+                        setCoordinates(newCoordinates);
+                        setDirection(Direction.LEFT);// új
+                        System.out.println("_LEFT_");
+                    } else if
+                    ((garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1),".")
+                                    || garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1)," "))
+                                    && (getCoordinates().getColumn() + 1) > movingEntity.getCoordinates().getColumn()){
+                        newCoordinates.setColumn(getCoordinates().getColumn() + 1);
+                        setCoordinates(newCoordinates);
+                        setDirection(Direction.RIGHT);// új
+                        System.out.println("_RIGHT_");
+                    } else {
+                        mowing2(garden, movingEntity); //mower stop
+                    }
                 }
                 break;
+
             case DOWN:
-                if (garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn()), ".")
-                        || garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn()), " ")) {
+                if ((garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn()),".")
+                        || garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn())," "))
+                        && (getCoordinates().getRow() + 1) > movingEntity.getCoordinates().getRow()){
                     newCoordinates.setRow(getCoordinates().getRow() + 1); //set newCoordinates
+                    setCoordinates(newCoordinates);
                     setDirection(Direction.DOWN);// új
+                    System.out.println("_DOWN_");
                 } else {
-                    stepAwayFromTheMovinObject(garden);
+                    System.out.println("_DOWN_else");
+                    //setCoordinates(stepAwayFromTheMovinObject(garden, movingEntity));
+                    if ((garden.isMark(new Coordinates(getCoordinates().getRow() - 1, getCoordinates().getColumn()),".")
+                            || garden.isMark(new Coordinates(getCoordinates().getRow() - 1, getCoordinates().getColumn())," "))
+                            && (getCoordinates().getRow() - 1) < movingEntity.getCoordinates().getRow()){
+                        newCoordinates.setRow(getCoordinates().getRow() - 1); //set newCoordinates
+                        setCoordinates(newCoordinates);
+                        setDirection(Direction.UP);// új
+                        System.out.println("_UP_");
+                    } else if
+                    ((garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1),".")
+                                    || garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1)," "))
+                                    && (getCoordinates().getColumn() - 1) < movingEntity.getCoordinates().getColumn()){
+                        newCoordinates.setColumn(getCoordinates().getColumn() - 1);
+                        setCoordinates(newCoordinates);
+                        setDirection(Direction.LEFT);// új
+                        System.out.println("_LEFT_");
+                    } else if
+                    ((garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1),".")
+                                    || garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1)," "))
+                                    && (getCoordinates().getColumn() + 1) > movingEntity.getCoordinates().getColumn()){
+                        newCoordinates.setColumn(getCoordinates().getColumn() + 1);
+                        setCoordinates(newCoordinates);
+                        setDirection(Direction.RIGHT);// új
+                        System.out.println("_RIGHT_");
+                    } else {
+                        mowing2(garden, movingEntity); //mower stop
+                    }
                 }
                 break;
             case LEFT:
-                if (garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1), ".")
-                        || garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1), " ")) {
+                if ((garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1),".")
+                        || garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1)," "))
+                        && (getCoordinates().getColumn() - 1) < movingEntity.getCoordinates().getColumn()){
                     newCoordinates.setColumn(getCoordinates().getColumn() - 1);
+                    setCoordinates(newCoordinates);
                     setDirection(Direction.LEFT);// új
+                    System.out.println("_LEFT_");
                 } else {
-                    stepAwayFromTheMovinObject(garden);
+                    System.out.println("_LEFT_else");
+                    //setCoordinates(stepAwayFromTheMovinObject(garden, movingEntity));
+                    if ((garden.isMark(new Coordinates(getCoordinates().getRow() - 1, getCoordinates().getColumn()),".")
+                            || garden.isMark(new Coordinates(getCoordinates().getRow() - 1, getCoordinates().getColumn())," "))
+                            && (getCoordinates().getRow() - 1) > movingEntity.getCoordinates().getRow()){
+                        newCoordinates.setRow(getCoordinates().getRow() - 1); //set newCoordinates
+                        setCoordinates(newCoordinates);
+                        setDirection(Direction.UP);// új
+                        System.out.println("_UP_");
+                    } else if
+                    ((garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn()),".")
+                                    || garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn())," "))
+                                    && (getCoordinates().getRow() + 1) < movingEntity.getCoordinates().getRow()){
+                        newCoordinates.setRow(getCoordinates().getRow() + 1); //set newCoordinates
+                        setCoordinates(newCoordinates);
+                        setDirection(Direction.DOWN);// új
+                        System.out.println("_DOWN_");
+                    } else if
+                    ((garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1),".")
+                                    || garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1)," "))
+                                    && (getCoordinates().getColumn() + 1) > movingEntity.getCoordinates().getColumn()){
+                        newCoordinates.setColumn(getCoordinates().getColumn() + 1);
+                        setCoordinates(newCoordinates);
+                        setDirection(Direction.RIGHT);// új
+                        System.out.println("_RIGHT_");
+                    } else {
+                        mowing2(garden, movingEntity); //mower stop
+                    }
                 }
                 break;
             case RIGHT:
-                if (garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1), ".")
-                        || garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1), " ")) {
+                if ((garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1),".")
+                        || garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() + 1)," "))
+                        && (getCoordinates().getColumn() + 1) > movingEntity.getCoordinates().getColumn()){
                     newCoordinates.setColumn(getCoordinates().getColumn() + 1);
+                    setCoordinates(newCoordinates);
                     setDirection(Direction.RIGHT);// új
+                    System.out.println("_RIGHT_");
                 } else {
-                    stepAwayFromTheMovinObject(garden);
+                    System.out.println("_RIGHT_else");
+                    //setCoordinates(stepAwayFromTheMovinObject(garden, movingEntity));
+                    if ((garden.isMark(new Coordinates(getCoordinates().getRow() - 1, getCoordinates().getColumn()),".")
+                            || garden.isMark(new Coordinates(getCoordinates().getRow() - 1, getCoordinates().getColumn())," "))
+                            && (getCoordinates().getRow() - 1) < movingEntity.getCoordinates().getRow()){
+                        newCoordinates.setRow(getCoordinates().getRow() - 1); //set newCoordinates
+                        setCoordinates(newCoordinates);
+                        setDirection(Direction.UP);// új
+                        System.out.println("_UP_");
+                    } else if
+                    ((garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn()),".")
+                                    || garden.isMark(new Coordinates(getCoordinates().getRow() + 1, getCoordinates().getColumn())," "))
+                                    && (getCoordinates().getRow() + 1) > movingEntity.getCoordinates().getRow()){
+                        newCoordinates.setRow(getCoordinates().getRow() + 1); //set newCoordinates
+                        setCoordinates(newCoordinates);
+                        setDirection(Direction.DOWN);// új
+                        System.out.println("_DOWN_");
+                    } else if
+                    ((garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1),".")
+                                    || garden.isMark(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn() - 1)," "))
+                                    && (getCoordinates().getColumn() - 1) < movingEntity.getCoordinates().getColumn()){
+                        newCoordinates.setColumn(getCoordinates().getColumn() - 1);
+                        setCoordinates(newCoordinates);
+                        setDirection(Direction.LEFT);// új
+                        System.out.println("_LEFT_");
+                    } else {
+                        mowing2(garden, movingEntity); //mower stop
+                    }
                 }
                 break;
 
         }
-        System.out.println("egyik sem fut le");
-        setDirection(getDirection());// új
-        setCoordinates(newCoordinates);
+        System.out.println("egyik sem fut le_getGivenDirection");
+        //setDirection(getDirection());// új
+        //setCoordinates(stepAwayFromTheMovinObject(garden, movingEntity));
+        System.out.println("row_utan_getGivenDirection: "+newCoordinates.getRow());
+        System.out.println("column_utan_getGivenDirection: "+newCoordinates.getColumn());
+
+
     }
 
     public void stepAwayFromTheMovinObject(Garden garden) throws InterruptedException {//Deprecated
@@ -486,6 +608,24 @@ public class Lawnmower {
             garden.draw();
         }
         mowerGoHome(garden);
+    }
+
+    //itt csak a cica mozog, a mower leááltt, mert túl közelmet a cicához
+    public void mowing2(Garden garden, MovingEntity movingentity) throws InterruptedException {
+        System.out.println("kezdeti string_me: "+garden.getCell(movingentity.getCoordinates()));
+        System.out.println("kezdeti string_lm: "+garden.getCell(getCoordinates()));
+        //movingentity.meMoving(garden);//új
+        //Coordinates meCoordinates = new Coordinates(5, 5);
+        //MovingEntity movingentity = new MovingEntity("C", meCoordinates, Direction.UP); //új
+        while (garden.checkRoom(".")) {
+            //mowingTheLawn(garden, movingentity);
+            movingentity.setCoordinates(movingentity.getCoordinates());
+            movingentity.makeMove(garden);//új
+            Thread.sleep(50);
+            garden.draw();
+            //garden.draw2();//új
+        }
+        //mowerGoHome(garden, movingentity);
     }
 
     public void mowingTwoObjects(Garden garden, MovingEntity movingentity) throws InterruptedException {
