@@ -128,12 +128,12 @@ public class LawnMowerMain {
             try {
                 number = scanner.nextInt();
                 if(number > 6 || number < 0){
-                    System.out.println("You can only enter a number between 0 and 5!");
+                    System.out.println("\u001b[1;31m" + "You can only enter a number between 0 and 5!" + "\u001b[0m");
                     inputCorrect = false;
                 }
 
             } catch (InputMismatchException e) {
-                System.out.println("This is not a valid integer!");
+                System.out.println("\u001b[1;31m" + "This is not a valid integer!" + "\u001b[0m");
                 inputCorrect = false;
             } finally {
                 scanner.nextLine();
