@@ -13,14 +13,15 @@ public class ReadFile {
     public ReadFile(Scanner scanner, int rows, int columns) {
         super();
         this.scanner = scanner;
-        this.rows = rows;
-        this.columns = columns;
+        //this.rows = rows;
+        //this.columns = columns;
     }
 
 
 
     public String[][] arrayFromTxt(String filename) {
-        String[][] myArray = new String[rows][columns];
+        bufferedReader(filename);
+        String[][] myArray = new String[bufferedReader(filename)[0]][bufferedReader(filename)[1]];
         try {
 
             File myObj = new File(filename);
