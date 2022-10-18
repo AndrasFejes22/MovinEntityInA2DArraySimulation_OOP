@@ -38,7 +38,7 @@ public class LawnMowerMain {
 
         int menuItem;
         try (scanner) {
-            ReadFile readFile = new ReadFile(scanner, 21, 21);
+            ReadFile readFile = new ReadFile(scanner);
             do {
                 printingMenu();
                 System.out.println();
@@ -46,7 +46,7 @@ public class LawnMowerMain {
                 switch (menuItem) {
                     case 1:
                         String [][] myArrayPr = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/gardenForPresentation.txt");
-                        Garden garden1 = new Garden (21,21, myArrayPr, lawnmower);
+                        Garden garden1 = new Garden (myArrayPr.length, myArrayPr[0].length, myArrayPr, lawnmower);
                         Coordinates lmCoordinates0 = new Coordinates(8, 6);
                         Coordinates lmCoordinates1 = new Coordinates(10, 6);
                         Coordinates lmCoordinates2 = new Coordinates(15, 9); //demohoz!
@@ -71,27 +71,27 @@ public class LawnMowerMain {
                         break;
                     case 3:
                         String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/gardenWithDiagonalWalls.txt");
-                        Garden garden2 = new Garden (21,21, myArray, lawnmower);
+                        Garden garden2 = new Garden(myArray.length, myArray[0].length, myArray, lawnmower);
                         lawnmower.mowing(garden2);
                         System.out.println("kezdeti string: "+garden2.getCell(meCoordinates));
                         System.out.println();
                         break;
                     case 4:
                         String [][] myArray2 = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/maze.txt");
-                        Garden garden3 = new Garden (21,21, myArray2, lawnmower);
+                        Garden garden3 = new Garden (myArray2.length, myArray2[0].length, myArray2, lawnmower);
                         lawnmower.mazeRunner(garden3);
                         System.out.println();
                         break;
                     case 5:
                         String [][] myEmptyArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/emptyGarden.txt");
                         //Garden garden4 = new Garden (21,21, myEmptyArray, lawnmower);
-                        Garden garden4 = new Garden (21,21, myEmptyArray, lawnmower);
+                        Garden garden4 = new Garden (myEmptyArray.length, myEmptyArray[0].length, myEmptyArray, lawnmower);
                         lawnmower.mowingTheLawnInAnEmptyGarden(garden4);
                         System.out.println();
                         break;
                     case 6:
                         String [][] myArray6 = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/gardenWithDiagonalWalls.txt");
-                        Garden garden6 = new Garden (21,21, myArray6, lawnmower, movingentity);
+                        Garden garden6 = new Garden (myArray6.length, myArray6[0].length, myArray6, lawnmower, movingentity);
                         lawnmower.mowingTwoObjects(garden6, movingentity);
                         //System.out.println("kezdeti string: "+garden6.getCell(meCoordinates));
                         System.out.println();

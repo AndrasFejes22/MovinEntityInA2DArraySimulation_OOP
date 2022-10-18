@@ -10,7 +10,7 @@ public class ReadFile {
     private int rows;
     private int columns;
 
-    public ReadFile(Scanner scanner, int rows, int columns) {
+    public ReadFile(Scanner scanner) {
         super();
         this.scanner = scanner;
         //this.rows = rows;
