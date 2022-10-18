@@ -1,5 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -50,5 +49,29 @@ public class ReadFile {
 
         return myArray;
 
+    }
+
+    private static int [] bufferedReader(String filename) {
+        int[] sizes = new int[2];
+        int row = 0;
+        int column = 0 ;
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            StringBuilder content = new StringBuilder();
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append('\n');
+                column = line.length();
+                row++;
+            }
+            System.out.println("A content of file: \n" + content);
+            System.out.println("row :"+ row);
+            System.out.println("line.length() :"+ column);
+        } catch (IOException e) {
+            System.out.println("Hiba történt: " + e.getMessage());
+        }
+        sizes[0] = row;
+        sizes[1] = column;
+        return sizes;
     }
 }

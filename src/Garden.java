@@ -93,8 +93,8 @@ public class Garden {
     }
 
     public Garden(int height, int width, String[][] arr, Lawnmower lawnmower){
-        this.height = height;
-        this.width = width;
+        this.height = height; //magasság
+        this.width = width; //szélesség
         //RANDOM = random;
         this.lawnmower = lawnmower;
         this.garden =  new String[height][width];
