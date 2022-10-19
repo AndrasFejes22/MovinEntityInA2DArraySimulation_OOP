@@ -72,8 +72,16 @@ public class LawnMowerMain {
                     case 3:
                         //String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/gardenWithDiagonalWalls.txt");
                         String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/littleGarden.txt");
-                        Garden garden2 = new Garden(myArray.length, myArray[0].length, myArray, lawnmower);
-                        lawnmower.mowing(garden2);
+                        Garden garden2 = null;
+                        try {
+                            garden2 = new Garden(myArray.length, myArray[0].length, myArray, lawnmower);
+                            lawnmower.mowing(garden2);
+                        } catch (Exception e) {
+                            System.out.println("\u001b[1;31m" + "Inappropriate indexing of the object!" + "\u001b[0m");
+                            System.out.println(e.getMessage());
+                        }
+                        // Garden garden2 = new Garden (9, 15, myArray, lawnmower); //deprecated
+                        //lawnmower.mowing(garden2);
                         System.out.println();
                         break;
                     case 4:
