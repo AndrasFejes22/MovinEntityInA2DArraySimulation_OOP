@@ -546,6 +546,7 @@ public class Lawnmower {
                     c2.setColumn(m);
                     while (!getCoordinates().isSame(c2)) {
                         setDirection(garden.getShortestPath(getDirection(), getCoordinates(), c2));
+                        System.out.println("direction in te while: " + getDirection());
                         moveToTheNextLawn(garden); //felokosított mozgás
                         garden.draw();//ha nem rajzolunk, olyan mintha ugrana, akár 10 lépést is!
                         break outer;//**odaért a koszhoz

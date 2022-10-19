@@ -29,7 +29,7 @@ public class LawnMowerMain {
 
     private void run(Scanner scanner) throws InterruptedException {
 
-        Coordinates lmCoordinates = new Coordinates(1, 1);
+        Coordinates lmCoordinates = new Coordinates(1, 18);
         Coordinates meCoordinates = new Coordinates(2, 19);
         Lawnmower lawnmower = new Lawnmower("@", lmCoordinates, Direction.RIGHT);
         MovingEntity movingentity = new MovingEntity("C", meCoordinates, Direction.LEFT);

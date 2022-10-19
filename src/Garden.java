@@ -99,13 +99,29 @@ public class Garden {
         this.lawnmower = lawnmower;
         this.garden =  new String[height][width];
 
-        for (int row = 0; row < height; row++) {//initLevel();
-            for (int column = 0; column < width; column++) {
+        if (coordinateCheck(height, width, lawnmower)) {
+            for (int row = 0; row < height; row++) {// initLevel();
+                for (int column = 0; column < width; column++) {
 
-                garden[row][column] = arr[row][column];
+                    garden[row][column] = arr[row][column];
 
+                }
             }
+        } else {
+            throw new NullPointerException("Grid max column index: "
+                    + height + ", mower column index: " + lawnmower.getCoordinates().getColumn() +
+                    ", Grid max row index: " + width + ", mower row index: " + lawnmower.getCoordinates().getRow());
+
         }
+    }
+
+    public boolean coordinateCheck(int height, int width, Lawnmower mower){
+        int lastRowIndex = height - 1;
+        int lastColumnIndex = width - 1;
+        if((mower.getCoordinates().getRow()>lastRowIndex) || (mower.getCoordinates().getColumn() > lastColumnIndex)) {
+            return false;
+        }
+        return true;
     }
 
     public String[][] getGarden() {
