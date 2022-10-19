@@ -101,7 +101,7 @@ public class Lawnmower {
 
     public void mowingTheLawnTwoObjects(Garden garden, MovingEntity movingentity) throws InterruptedException {
 
-        System.out.println("belép a mowingTheLawn-ba: ");
+        System.out.println("belép a mowingTheLawnTwoObjects-ba: ");
         System.out.println();
         setMark("@");
         Coordinates newCoordinates = new Coordinates(getCoordinates());// new Coordinate object
@@ -249,8 +249,8 @@ public class Lawnmower {
     }
 
         public void moveToTheNextLawnTwoObjects(Garden garden, String mark, MovingEntity movingentity) throws InterruptedException {
-            movingentity.makeMove(garden);
-            //movingentity.makeMove(garden);//új
+            //movingentity.makeMove(garden);
+            movingentity.makeMove(garden);//új
             //mark = "M";
             setMark(mark);
             //System.out.println("moving to the next dirt");//kiírja, akkor is, ha nincs dirt, mert ez egy mozgató method, és ez a cleanerGoHome() is!
@@ -723,7 +723,7 @@ public class Lawnmower {
 
             setDirection(garden.getShortestPath(getDirection(),getCoordinates(), c2));
             moveToTheNextLawnTwoObjects(garden, "H", movingentity);
-            garden.draw();
+            garden.drawTwoObjects();
             System.out.println("----------" + ctr + "---------");
             Thread.sleep(60);
             ctr++;
