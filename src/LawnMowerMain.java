@@ -12,12 +12,15 @@ public class LawnMowerMain {
 
     //Further improvements needed:
 
-    //1.: Exception handling in the main menu /d
-    //2.: Moving entity in the garden /d
+    //1.: Exception handling in the main menu --> menu items
+    //2.: Moving entity in the garden // CRAZY CAT
     //3.: Two, or more mower in the garden
     //4.: addRandomWalls --> addDiagonalWalls
     //5.: write more clean, structured and readable code
     //6.: implement stop() function
+    //7.: improve ReadFile method
+    //8.: Test classes
+    //9.: Exception handling in the main menu --> Grid overindexing
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -81,7 +84,6 @@ public class LawnMowerMain {
                             System.out.println(e.getMessage());
                         }
                         // Garden garden2 = new Garden (9, 15, myArray, lawnmower); //deprecated
-                        //lawnmower.mowing(garden2);
                         System.out.println();
                         break;
                     case 4:
