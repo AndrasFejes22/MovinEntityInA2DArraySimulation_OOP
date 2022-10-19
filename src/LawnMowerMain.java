@@ -29,7 +29,7 @@ public class LawnMowerMain {
 
     private void run(Scanner scanner) throws InterruptedException {
 
-        Coordinates lmCoordinates = new Coordinates(1, 19);
+        Coordinates lmCoordinates = new Coordinates(1, 1);
         Coordinates meCoordinates = new Coordinates(2, 19);
         Lawnmower lawnmower = new Lawnmower("@", lmCoordinates, Direction.RIGHT);
         MovingEntity movingentity = new MovingEntity("C", meCoordinates, Direction.LEFT);
@@ -70,10 +70,10 @@ public class LawnMowerMain {
                         System.out.println();
                         break;
                     case 3:
-                        String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/gardenWithDiagonalWalls.txt");
+                        //String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/gardenWithDiagonalWalls.txt");
+                        String [][] myArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/littleGarden.txt");
                         Garden garden2 = new Garden(myArray.length, myArray[0].length, myArray, lawnmower);
                         lawnmower.mowing(garden2);
-                        System.out.println("kezdeti string: "+garden2.getCell(meCoordinates));
                         System.out.println();
                         break;
                     case 4:
@@ -128,7 +128,7 @@ public class LawnMowerMain {
             try {
                 number = scanner.nextInt();
                 if(number > 6 || number < 0){
-                    System.out.println("\u001b[1;31m" + "You can only enter a number between 0 and 5!" + "\u001b[0m");
+                    System.out.println("\u001b[1;31m" + "You can only enter a number between 0 and 6!" + "\u001b[0m");
                     inputCorrect = false;
                 }
 
