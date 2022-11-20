@@ -32,7 +32,7 @@ public class LawnMowerMain {
 
     private void run(Scanner scanner) throws InterruptedException {
 
-        Coordinates lmCoordinates = new Coordinates(1, 18);
+        Coordinates lmCoordinates = new Coordinates(1, 1);
         Coordinates meCoordinates = new Coordinates(2, 19);
         Lawnmower lawnmower = new Lawnmower("@", lmCoordinates, Direction.RIGHT);
         MovingEntity movingentity = new MovingEntity("C", meCoordinates, Direction.LEFT);
@@ -96,7 +96,8 @@ public class LawnMowerMain {
                         String [][] myEmptyArray = readFile.arrayFromTxt("C:/Users/Andris/IdeaProjects/VacuumCleanerSimulation_OOP/src/gardens/emptyGarden.txt");
                         //Garden garden4 = new Garden (21,21, myEmptyArray, lawnmower);
                         Garden garden4 = new Garden (myEmptyArray.length, myEmptyArray[0].length, myEmptyArray, lawnmower);
-                        lawnmower.mowingTheLawnInAnEmptyGarden(garden4);
+                        //lawnmower.mowingTheLawnInAnEmptyGarden(garden4);
+                        lawnmower.nextStep(garden4);
                         System.out.println();
                         break;
                     case 6:

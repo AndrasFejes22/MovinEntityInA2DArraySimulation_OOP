@@ -12,7 +12,8 @@ public class Lawnmower {
     public String toString() {
         return "VacuumCleaner{" +
                 "mark='" + mark + '\'' +
-                ", coordinates=" + coordinates +
+                ", coordinates (row) =" + coordinates.getRow()  +
+                ", coordinates (column) =" + coordinates.getColumn()  +
 
                 ", direction=" + direction +
                 '}';
@@ -62,6 +63,52 @@ public class Lawnmower {
     }
 
     ////////////////////////// FŐ MOZGÁSOK //////////////////////////////////
+
+    public void nextStep(Garden garden) throws InterruptedException {
+        Coordinates newCoordinates = new Coordinates(getCoordinates());// new Coordinate object
+        setMark("N");
+        System.out.println(this);
+        List<Coordinates> list = new ArrayList<>();
+        Coordinates lmCoordinates0 = new Coordinates(1, 2);
+        Coordinates lmCoordinates1 = new Coordinates(1, 3);
+        Coordinates lmCoordinates2 = new Coordinates(1, 4);
+        Coordinates lmCoordinates3 = new Coordinates(1, 5);
+        Coordinates lmCoordinates4 = new Coordinates(1, 6);
+        Coordinates lmCoordinates5 = new Coordinates(1, 7);
+        Coordinates lmCoordinates55 = new Coordinates(1, 8);
+        Coordinates lmCoordinates6 = new Coordinates(1, 9);
+        Coordinates lmCoordinates7 = new Coordinates(1, 10);
+        Coordinates lmCoordinates8 = new Coordinates(1, 11);
+        Coordinates lmCoordinates9 = new Coordinates(1, 12);
+        Coordinates lmCoordinates10 = new Coordinates(1, 13);
+        Coordinates lmCoordinates11 = new Coordinates(1, 14);
+        Coordinates lmCoordinates12 = new Coordinates(1, 15);
+        Coordinates lmCoordinates13 = new Coordinates(1, 16);
+        list.add(lmCoordinates0);
+        list.add(lmCoordinates1);
+        list.add(lmCoordinates2);
+        list.add(lmCoordinates3);
+        list.add(lmCoordinates4);
+        list.add(lmCoordinates5);
+        list.add(lmCoordinates55);
+        list.add(lmCoordinates6);
+        list.add(lmCoordinates7);
+        list.add(lmCoordinates8);
+        list.add(lmCoordinates9);
+        list.add(lmCoordinates10);
+        list.add(lmCoordinates11);
+        list.add(lmCoordinates12);
+        list.add(lmCoordinates13);
+        //list.add(lmCoordinates5);
+        for(int i = 0; i < list.size(); i++){
+            newCoordinates.setColumn(list.get(i).getColumn());
+            newCoordinates.setRow(list.get(i).getRow());
+            setCoordinates(newCoordinates);// setCoordinates(newCoordinates);
+            garden.setCleaned(new Coordinates(getCoordinates().getRow(), getCoordinates().getColumn()));
+            Thread.sleep(1000);
+            garden.draw();
+        }
+    }
 
     //1.: Körbenéz, hogy merre tud lépni
     public void mowingTheLawn(Garden garden) throws InterruptedException {
